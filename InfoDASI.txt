@@ -1,0 +1,8 @@
+DASI:
+
+Creer une base de données:
+-> Service :
+clic droit "create database"
+ATTENTION : Ajouter le nom de la BD dans persistance.xml et dans JpaUtil.java
+
+
