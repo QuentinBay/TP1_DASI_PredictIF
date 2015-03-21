@@ -6,6 +6,11 @@
     <class>predictif.metier.modele.Employe</class>
     <class>predictif.metier.modele.SigneAstrologique</class>
     <class>predictif.metier.modele.Medium</class>
+    <class>predictif.metier.modele.Prediction</class>
+    <class>predictif.metier.modele.Horoscope</class>
+    <class>predictif.metier.modele.Travail</class>
+    <class>predictif.metier.modele.Amour</class>
+    <class>predictif.metier.modele.Sante</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/PredictIFBD"/>
       <property name="javax.persistence.jdbc.password" value="B3434"/>

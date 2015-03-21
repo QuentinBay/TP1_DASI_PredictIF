@@ -27,18 +27,20 @@ public class Client implements Serializable {
     private char civilite;
     private String nom;
     private String prenom;
-     @Temporal(TemporalType.DATE)
-     private Date dateNaissance;
+    @Temporal(TemporalType.DATE)
+    private Date dateNaissance;
     private String addPostale;
     private String numTelephone;
     private String addElectronique;
     
-    @ManyToOne
+    @ManyToOne //Lien unidirectionnel
     private SigneAstrologique signe;
     
-    @ManyToMany
+    @ManyToMany //Lien unidirectionnel
     private List<Medium> mediums;
 
+    @OneToMany(mappedBy="client") //Lien bidirectionnel
+    private List<Horoscope> horoscopes;
     
     /*------------------------------------ GETTERS & SETTERS ----------------------------------*/
     public Long getNumClient() {
@@ -93,6 +95,32 @@ public class Client implements Serializable {
     public void setAddElectronique(String addElectronique) {
         this.addElectronique = addElectronique;
     }
+
+    public SigneAstrologique getSigne() {
+        return signe;
+    }
+
+    public void setSigne(SigneAstrologique signe) {
+        this.signe = signe;
+    }
+
+    public List<Medium> getMediums() {
+        return mediums;
+    }
+
+    public void setMediums(List<Medium> mediums) {
+        this.mediums = mediums;
+    }
+
+    public List<Horoscope> getHoroscopes() {
+        return horoscopes;
+    }
+
+    public void setHoroscopes(List<Horoscope> horoscopes) {
+        this.horoscopes = horoscopes;
+    }
+    
+    
     
     /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
     public Client() {}
@@ -146,5 +174,17 @@ public class Client implements Serializable {
     public void removeMedium (Medium unMedium)
     {
         this.mediums.remove(unMedium);
+    }
+    
+    public void addHoroscope ( Horoscope unHoroscope )
+    {
+        this.horoscopes.add(unHoroscope);
+        unHoroscope.setClient(this);
+    }
+    
+    public void removeHoroscope (Horoscope unHoroscope)
+    {
+        this.horoscopes.remove(unHoroscope);
+        unHoroscope.setClient(null);
     }
 }
