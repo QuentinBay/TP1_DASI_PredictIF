@@ -7,7 +7,6 @@ package predictif.dao;
 
 import predictif.metier.modele.Medium;
 import java.util.List;
-import java.util.Vector;
 /**
  *
  * @author qbayart

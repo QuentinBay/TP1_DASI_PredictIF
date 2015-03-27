@@ -18,7 +18,9 @@ import javax.persistence.*;
  * @author qbayart
  */
 @Entity
-public abstract class Prediction implements Serializable {
+//Precision du type d heritage : Toutes les predictions dans une seule table
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE) 
+public class Prediction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

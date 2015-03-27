@@ -14,7 +14,7 @@ import javax.persistence.Entity;
  * @author qbayart
  */
 @Entity
-public class Sante extends Prediction
+public class Sante extends Prediction implements Serializable
 {
     private String conseil;
 

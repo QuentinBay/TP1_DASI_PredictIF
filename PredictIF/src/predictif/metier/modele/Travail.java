@@ -15,7 +15,8 @@ import javax.persistence.Entity;
  * @author qbayart
  */
 @Entity
-public class Travail extends Prediction {
+public class Travail extends Prediction implements Serializable 
+{
     
 
     /*------------------------------------ Getters et Setters ---------------------------*/

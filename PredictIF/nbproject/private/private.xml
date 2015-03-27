@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/Main.java</file>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/MediumDao.java</file>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/jpa/MediumDaoJpa.java</file>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/modele/Horoscope.java</file>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/modele/Client.java</file>
+        </group>
+    </open-files>
+</project-private>

@@ -15,7 +15,8 @@ import javax.persistence.*;
  * @author qbayart
  */
 @Entity
-public class Amour extends Prediction {
+public class Amour extends Prediction implements Serializable 
+{
     
     @ManyToOne
     private SigneAstrologique partenaire;
