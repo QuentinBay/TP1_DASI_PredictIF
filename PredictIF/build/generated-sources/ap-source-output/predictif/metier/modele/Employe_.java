@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import predictif.metier.modele.Client;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-27T16:04:30")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-27T16:51:17")
 @StaticMetamodel(Employe.class)
 public class Employe_ { 
 
