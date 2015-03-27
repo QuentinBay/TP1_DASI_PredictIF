@@ -30,7 +30,7 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
     public void creerTousLesSignesAstrologiques() 
     //On cree tous les signes astrologiques car ceux sont 12 entites predefinies
     {
-        JpaUtil.log("debut transaction");
+        JpaUtil.log("debut transaction : creerTousLesSignesAstrologiques");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             
