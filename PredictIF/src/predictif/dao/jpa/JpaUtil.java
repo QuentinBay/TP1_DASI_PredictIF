@@ -135,30 +135,7 @@ public class JpaUtil {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    /**
-     * Persist
-     * <br/><strong>À utiliser uniquement au niveau Service.</strong>
-     */
-    public static void persisterClient(Client c) {
-        log("debut transaction");
-        try {
-            EntityManager em = threadLocalEntityManager.get();
-            em.persist(c);
-        } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public static void persisterEmploye(Employe e) {
-        log("debut transaction");
-        try {
-            EntityManager em = threadLocalEntityManager.get();
-            em.persist(e);
-        } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
 
     /**
      * Valide la transaction courante sur l'instance courante de Entity Manager.

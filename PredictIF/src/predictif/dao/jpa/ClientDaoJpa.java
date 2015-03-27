@@ -17,15 +17,15 @@ import java.util.logging.Logger;
  */
 public class ClientDaoJpa implements ClientDao {
 
-    /* --------------------------------------- CONSTRUCTEURS --------------------------------------- */
+    /* --------------------- CONSTRUCTEURS ---------------------------------- */
     
     public ClientDaoJpa() {}
     
-    /* ----------------------------------------- METHODES ------------------------------------------ */
+    /* ------------------------ METHODES ------------------------------------ */
 
     @Override
     public void creerClient(Client unClient) {
-        JpaUtil.log("debut transaction");
+        JpaUtil.log("debut transaction : ClientDao");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unClient);

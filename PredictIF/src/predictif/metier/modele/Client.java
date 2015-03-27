@@ -42,7 +42,7 @@ public class Client implements Serializable {
     @OneToMany(mappedBy="client") //Lien bidirectionnel
     private List<Horoscope> horoscopes;
     
-    /*------------------------------------ GETTERS & SETTERS ----------------------------------*/
+    /*-------------------------- GETTERS & SETTERS ---------------------------*/
     public Long getNumClient() {
         return numClient;
     }
@@ -122,11 +122,12 @@ public class Client implements Serializable {
     
     
     
-    /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
+    /* --------------------------- CONSTRUCTEURS ---------------------------- */
     public Client() {}
 
     
-    public Client ( char aCivilite, String aNom, String aPrenom, Date aDateNaissance, String anAddPostale,
+    public Client ( char aCivilite, String aNom, String aPrenom, 
+                    Date aDateNaissance, String anAddPostale,
                     String aNumTelephone, String anAddElectronique)
     {
         civilite = aCivilite;

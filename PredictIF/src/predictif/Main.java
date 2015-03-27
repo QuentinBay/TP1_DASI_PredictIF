@@ -5,6 +5,7 @@
  */
 package predictif;
 
+import predictif.metier.service.Service;
 import predictif.dao.jpa.JpaUtil;
 import predictif.dao.ClientDao;
 import predictif.dao.jpa.ClientDaoJpa;
@@ -24,14 +25,18 @@ public class Main
 {
     public static void main (String[] args)
     {
-       JpaUtil.init();
+        Service service = new Service();
+        Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 15), 
+                                "123 rue", "060555555", "papin@hotmail.fr");
+        service.ajouterClient(c1);
+       /*JpaUtil.init();
        JpaUtil.creerEntityManager();
        JpaUtil.ouvrirTransaction();
        
        SigneAstrologiqueDao monGEAstro = new SigneAstrologiqueDaoJpa();
        monGEAstro.creerTousLesSignesAstrologiques();
        
-       Client c1 = new Client( 'm', "Alexis", "Papin", new Date(10, 10, 15), "123 rue", "060555555", "papin@hotmail.fr");
+       
        ClientDao monGestionnaireEntites = new ClientDaoJpa();
        monGestionnaireEntites.creerClient(c1);
        
@@ -42,7 +47,7 @@ public class Main
        e1.addClient(c1);
        
        JpaUtil.validerTransaction();
-       JpaUtil.fermerEntityManager();
+       JpaUtil.fermerEntityManager();*/
     }
     
 }
