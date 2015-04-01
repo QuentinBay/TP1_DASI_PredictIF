@@ -26,10 +26,21 @@ public class Main
     public static void main (String[] args)
     {
         Service service = new Service();
-        Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 15), 
+        //service.initialiser();
+        Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
+        if (e!=null)
+        {
+            System.out.println(e.getPrenom()+" "+e.getNom());
+        }
+        else
+        {
+            System.out.println("Employe not found !");
+        }
+        
+       /* Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 15), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
         service.ajouterClient(c1);
-       /*JpaUtil.init();
+       JpaUtil.init();
        JpaUtil.creerEntityManager();
        JpaUtil.ouvrirTransaction();
        

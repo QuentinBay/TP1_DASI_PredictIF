@@ -25,10 +25,7 @@ public class SigneAstrologique implements Serializable {
     private String signe;
     private int mois;
 
-    
-    
-
-    /*------------------------------------ Getters et Setters ------------------------------------------*/
+/*-------------------------------GETTERS & SETTERS--------------------------------*/
     public Long getId() {
         return id;
     }
@@ -40,14 +37,14 @@ public class SigneAstrologique implements Serializable {
         this.signe = signe;
     }
     
-	 public int getMois() {
+    public int getMois() {
         return mois;
     }
     public void setMois(int mois) {
         this.mois = mois;
     }
     
-    /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
+/*---------------------------------CONSTRUCTEURS----------------------------------*/
     public SigneAstrologique () {}
     
     public SigneAstrologique (int unMois)
@@ -92,22 +89,28 @@ public class SigneAstrologique implements Serializable {
                     break;
         }
     }
-
+    
+/*------------------------------------METHODES------------------------------------*/
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object) 
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SigneAstrologique)) {
+        if (!(object instanceof SigneAstrologique)) 
+        {
             return false;
         }
         SigneAstrologique other = (SigneAstrologique) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || 
+                (this.id != null && !this.id.equals(other.id))) 
+        {
             return false;
         }
         return true;

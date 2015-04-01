@@ -19,13 +19,11 @@ import java.util.Date;
 public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao 
 {
     
-/* --------------------------------------- CONSTRUCTEURS --------------------------------------- */
-    
+/*----------------------------------CONSTRUCTEURS---------------------------------*/
     public SigneAstrologiqueDaoJpa () {}
     
     
-/* ----------------------------------------- METHODES ------------------------------------------ */
-    
+/*-------------------------------------METHODES-----------------------------------*/
     @Override
     public void creerTousLesSignesAstrologiques() 
     //On cree tous les signes astrologiques car ceux sont 12 entites predefinies

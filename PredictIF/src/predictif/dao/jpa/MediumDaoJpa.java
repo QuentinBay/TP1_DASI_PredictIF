@@ -30,7 +30,7 @@ public class MediumDaoJpa implements MediumDao
     
     @Override
     public void creerMedium(Medium unMedium) {
-        JpaUtil.log("debut transaction");
+        JpaUtil.log("debut transaction : creerMedium");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unMedium);

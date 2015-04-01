@@ -21,7 +21,13 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
 
     @Override
     public void creerHoroscope(Horoscope unHoroscope) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JpaUtil.log("debut transaction : creerHoroscope");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            em.persist(unHoroscope);
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

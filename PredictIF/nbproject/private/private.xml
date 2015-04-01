@@ -5,9 +5,7 @@
         <group>
             <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/Main.java</file>
             <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/jpa/EmployeDaoJpa.java</file>
-            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/jpa/JpaUtil.java</file>
-            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/modele/Horoscope.java</file>
-            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/EmployeDao.java</file>
+            <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/modele/SigneAstrologique.java</file>
             <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/service/Service.java</file>
             <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/dao/jpa/SigneAstrologiqueDaoJpa.java</file>
             <file>file:/home/quentin/Documents/3IF/DASI/TP1_PredictIF/PredictIF/src/predictif/metier/modele/Employe.java</file>

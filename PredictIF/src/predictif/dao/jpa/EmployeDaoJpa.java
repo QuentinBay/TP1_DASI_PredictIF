@@ -20,15 +20,15 @@ import javax.persistence.Query;
 
 public class EmployeDaoJpa implements EmployeDao 
 {
-/* --------------------------------------- CONSTRUCTEURS --------------------------------------- */
+/*----------------------------------CONSTRUCTEURS---------------------------------*/
     
     public EmployeDaoJpa () {}
     
     
-/* ----------------------------------------- METHODES ------------------------------------------ */
+/*-----------------------------------METHODES-------------------------------------*/
     @Override
     public void creerEmploye(Employe unEmploye) {
-        JpaUtil.log("debut transaction");
+        JpaUtil.log("debut transaction : creerEmploye");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unEmploye);
@@ -57,7 +57,15 @@ public class EmployeDaoJpa implements EmployeDao
         query.setParameter("empPseudo", unPseudo);
         query.setParameter("empMotDePasse", unMdp);
         List<Employe> result = (List<Employe>)query.getResultList();
-        return (result.get(0));
+        if (!result.isEmpty())
+        {
+            return (result.get(0));
+        }
+        else
+        {
+            return null;
+        }
+        
     }
     
 }
