@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import predictif.metier.modele.SigneAstrologique;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-27T16:51:17")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-27T17:36:33")
 @StaticMetamodel(Amour.class)
 public class Amour_ extends Prediction_ {
 

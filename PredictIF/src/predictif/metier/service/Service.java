@@ -46,15 +46,15 @@ import java.util.logging.Logger;
  */
 public class Service 
 {
-/*--------------------------------ATTRIBUTS-----------------------------------*/
+/*------------------------------------ATTRIBUTS-----------------------------------*/
 
     
-/*------------------------------CONSTRUCTEURS---------------------------------*/
+/*----------------------------------CONSTRUCTEURS---------------------------------*/
     public Service ()
     {
         
     }
-/*---------------------------------METHODES-----------------------------------*/
+/*-------------------------------------METHODES-----------------------------------*/
     public void initialiser()
     // On cree pleins de clients, employes.. pour la demo
     {
@@ -67,12 +67,12 @@ public class Service
             try 
             {
                 JpaUtil.ouvrirTransaction();
-                /*----------------CREATION SIGNES ASTROLOGIQUES---------------*/
+/*----------------------------CREATION SIGNES ASTROLOGIQUES-----------------------*/
                 SigneAstrologiqueDao monGESigneAstrologique = new SigneAstrologiqueDaoJpa();
                 monGESigneAstrologique.creerTousLesSignesAstrologiques();
                 
                 
-                /*--------------------CREATION CLIENTS------------------------*/
+/*--------------------------------CREATION CLIENTS--------------------------------*/
                 ClientDao monGEClient = new ClientDaoJpa();
                 Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 94), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
@@ -105,35 +105,127 @@ public class Service
                 monGEClient.creerClient(c9);
                 monGEClient.creerClient(c10);
                 
-                /*--------------------CREATION MEDIUMS------------------------*/
+/*-------------------------------CREATION MEDIUMS---------------------------------*/
                 MediumDao monGEMedium = new MediumDaoJpa();
                 Medium m1 = new Medium("Madame Irma");
+                Medium m2 = new Medium("Madame du Soleil");
+                Medium m3 = new Medium("Mamadou");
+                Medium m4 = new Medium("Monsieur Tarot");
+                Medium m5 = new Medium("Claire Voyance");
+                Medium m6 = new Medium("Mademoiselle future");
+                Medium m7 = new Medium("Paul Lepoulpe");
+                Medium m8 = new Medium("Charles Atant");
+                Medium m9 = new Medium("Jean Caisse");
+                Medium m10 = new Medium("Dieu");
+                Medium m11 = new Medium("Monsieur Voyant");
+                Medium m12 = new Medium("Madame Voyante");
+				
                 monGEMedium.creerMedium(m1);
+                monGEMedium.creerMedium(m2);
+                monGEMedium.creerMedium(m3);
+                monGEMedium.creerMedium(m4);
+                monGEMedium.creerMedium(m5);
+                monGEMedium.creerMedium(m6);
+                monGEMedium.creerMedium(m7);
+                monGEMedium.creerMedium(m8);
+                monGEMedium.creerMedium(m9);
+                monGEMedium.creerMedium(m10);
+                monGEMedium.creerMedium(m11);
+                monGEMedium.creerMedium(m12);
                 
-                // TODO (faire 10 - 15 mediums) !!!!!!!!!!!!!!!!
-                
-                /*-------------------CREATION EMPLOYES------------------------*/
+/*------------------------------CREATION EMPLOYES---------------------------------*/
                 EmployeDao monGEEmploye = new EmployeDaoJpa();
                 Employe e1 = new Employe ( "Bubu", "mdp", "Thomas", "Buffard");
+                Employe e2 = new Employe ( "Chamcham", "0000", "Gael", "Champion");
+                Employe e3 = new Employe ( "Gege", "1234", "Jorik", "Geiger");
+                Employe e4 = new Employe ( "Digi", "9999", "Quentin", "Gillet");
+                Employe e5 = new Employe ( "Guigui", "abcd", "Corentin", "Guignart");
+                Employe e6 = new Employe ( "Schascha", "aaaa", "Valentin", "Schafer");
+                Employe e7 = new Employe ( "Lulu", "password", "Morgan", "Lupion");
+                Employe e8 = new Employe ( "Etieti", "monmdp", "Elyne", "Etienne");
+                Employe e9 = new Employe ( "Dede", "azerty", "Adelaide", "Dearbe");
+                Employe e10 = new Employe ( "Baba", "querty", "Laura", "Basset");
+                Employe e11 = new Employe ( "bobo", "nbvcx", "Sarah", "Bordot");
+                Employe e12 = new Employe ( "Mama", "poire", "Morgane", "Maillarbaux");
+					
                 monGEEmploye.creerEmploye(e1);
-                // TODO (faire 10 - 15 employes) !!!!!!!!!!!!!!!!
+                monGEEmploye.creerEmploye(e2);
+                monGEEmploye.creerEmploye(e3);
+                monGEEmploye.creerEmploye(e4);
+                monGEEmploye.creerEmploye(e5);
+                monGEEmploye.creerEmploye(e6);
+                monGEEmploye.creerEmploye(e7);
+                monGEEmploye.creerEmploye(e8);
+                monGEEmploye.creerEmploye(e9);
+                monGEEmploye.creerEmploye(e10);
+                monGEEmploye.creerEmploye(e11);
+                monGEEmploye.creerEmploye(e12);
                 
                 
-                /*------------------CREATION PREDICTIONS----------------------*/
+/*------------------------------CREATION PREDICTIONS------------------------------*/
                 PredictionDao monGEPrediction = new PredictionDaoJpa();
                 Prediction p1 = new Prediction(1, 4, "Vous vous portez très bien aujourd'hui", 
                                                 "image");
+                Prediction p2 = new Prediction(1, 1, "Ca ne va pas fort aujourd'hui", 
+					"pluie");
+                Prediction p3 = new Prediction(2, 2, "Une journée plutot commune", 
+                        "ordinateur");
+                Prediction p4 = new Prediction(3, 4, "Une très bonne rencontre aujourd'hui", 
+                        "coeur4");
+                Prediction p5 = new Prediction(2, 3, "Votre travail sera reconnu", 
+                        "ordinateur");
+                Prediction p6 = new Prediction(1, 4, "Vous vous sentez libre comme l'air", 
+                        "soleil");
+                Prediction p7 = new Prediction(3, 1, "Ca ne sent pas bon pour votre couple", 
+                        "coeur1");
+                Prediction p8 = new Prediction(3, 2, "Une routine morose se fait sentir", 
+                        "coeur2");
+                Prediction p9 = new Prediction(1, 1, "Votre tête vous fait mal", 
+                        "pluie");
+                Prediction p10 = new Prediction(2, 4, "Une promotion vous attend", 
+                        "ordinateur");
+                Prediction p11 = new Prediction(1, 2, "Vous êtes un peu dans le brouillard", 
+                        "nuageux");
+                Prediction p12 = new Prediction(3, 3, "Tout va pour le mieux, profitez-en", 
+                        "coeur3");
+												
                 monGEPrediction.creerPrediction(p1);
+                monGEPrediction.creerPrediction(p2);
+                monGEPrediction.creerPrediction(p3);
+                monGEPrediction.creerPrediction(p4);
+                monGEPrediction.creerPrediction(p5);
+                monGEPrediction.creerPrediction(p6);
+                monGEPrediction.creerPrediction(p7);
+                monGEPrediction.creerPrediction(p8);
+                monGEPrediction.creerPrediction(p9);
+                monGEPrediction.creerPrediction(p10);
+                monGEPrediction.creerPrediction(p11);
+                monGEPrediction.creerPrediction(p12);
                 
-                // TODO (faire 10 - 15 predictions) !!!!!!!!!!!!!!!!
                 
-                
-                /*-------------------CREATION HOROSCOPES----------------------*/
+/*------------------------------CREATION HOROSCOPES-------------------------------*/
                 HoroscopeDao monGEHoroscope = new HoroscopeDaoJpa();
                 Horoscope h1 = new Horoscope(new Date(10,4,15));
-                monGEHoroscope.ajouterPrediction(p1);
-                
-                // TODO (faire 5 - 10 horoscopes) !!!!!!!!!!!!!!!!
+                Horoscope h2 = new Horoscope(new Date(2014,2,15));
+                Horoscope h3 = new Horoscope(new Date(2014,3,20));
+                Horoscope h4 = new Horoscope(new Date(2014,4,26));
+                Horoscope h5 = new Horoscope(new Date(2015,1,5));
+                Horoscope h6 = new Horoscope(new Date(2015,2,19));
+                Horoscope h7 = new Horoscope(new Date(2015,3,5));
+                Horoscope h8 = new Horoscope(new Date(2015,4,7));
+                Horoscope h9 = new Horoscope(new Date(2015,5,14));
+                Horoscope h10 = new Horoscope(new Date(2015,6,28));
+
+                monGEHoroscope.creerHoroscope(h1);
+                monGEHoroscope.creerHoroscope(h2);
+                monGEHoroscope.creerHoroscope(h3);
+                monGEHoroscope.creerHoroscope(h4);
+                monGEHoroscope.creerHoroscope(h5);
+                monGEHoroscope.creerHoroscope(h6);
+                monGEHoroscope.creerHoroscope(h7);
+                monGEHoroscope.creerHoroscope(h8);
+                monGEHoroscope.creerHoroscope(h9);
+                monGEHoroscope.creerHoroscope(h10);
                 
 
                 JpaUtil.validerTransaction();
