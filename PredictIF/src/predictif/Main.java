@@ -13,10 +13,14 @@ import predictif.dao.EmployeDao;
 import predictif.dao.jpa.SigneAstrologiqueDaoJpa;
 import predictif.dao.SigneAstrologiqueDao;
 import predictif.dao.jpa.EmployeDaoJpa;
+
 import predictif.metier.modele.Client;
 import predictif.metier.modele.Employe;
-import java.util.Date;
+import predictif.metier.modele.Medium;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Iterator;
 /**
  *
  * @author qbayart
@@ -39,9 +43,17 @@ public class Main
         {
             System.out.println("Employe not found !");
         }
-      
+        List<Medium> mediums = (List<Medium>)service.listerMediums();
+        System.out.println("Nb de mediums : "+mediums.size());
+        Iterator it = mediums.iterator();
+        
+        while(it.hasNext())
+        {
+            
+            System.out.println(it.next().toString());
+        }
        /* Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 15), 
-                                "123 rue", "060555555", "papin@hotmail.fr");
+                                "123 rue", "060555555", apin@hotmail.fr");
         service.ajouterClient(c1);
        JpaUtil.init();
        JpaUtil.creerEntityManager();

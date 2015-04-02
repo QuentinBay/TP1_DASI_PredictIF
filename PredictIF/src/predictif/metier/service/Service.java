@@ -50,10 +50,7 @@ public class Service
 
     
 /*----------------------------------CONSTRUCTEURS---------------------------------*/
-    public Service ()
-    {
-        
-    }
+    public Service () { }
 /*-------------------------------------METHODES-----------------------------------*/
     public void initialiser()
     // On cree pleins de clients, employes.. pour la demo
@@ -107,18 +104,18 @@ public class Service
                 
 /*-------------------------------CREATION MEDIUMS---------------------------------*/
                 MediumDao monGEMedium = new MediumDaoJpa();
-                Medium m1 = new Medium("Madame Irma");
-                Medium m2 = new Medium("Madame du Soleil");
-                Medium m3 = new Medium("Mamadou");
-                Medium m4 = new Medium("Monsieur Tarot");
-                Medium m5 = new Medium("Claire Voyance");
-                Medium m6 = new Medium("Mademoiselle future");
-                Medium m7 = new Medium("Paul Lepoulpe");
-                Medium m8 = new Medium("Charles Atant");
-                Medium m9 = new Medium("Jean Caisse");
-                Medium m10 = new Medium("Dieu");
-                Medium m11 = new Medium("Monsieur Voyant");
-                Medium m12 = new Medium("Madame Voyante");
+                Medium m1 = new Medium("Madame Irma","Voyante reconnue","photo");
+                Medium m2 = new Medium("Madame du Soleil","Voyante reconnue","photo");
+                Medium m3 = new Medium("Marabou","Voyant reconnu","photo");
+                Medium m4 = new Medium("Monsieur Tarot","Voyant reconnu","photo");
+                Medium m5 = new Medium("Claire Voyance","Voyante reconnue","photo");
+                Medium m6 = new Medium("Mademoiselle future","Voyante reconnue","photo");
+                Medium m7 = new Medium("Paul Lepoulpe","Voyant reconnu","photo");
+                Medium m8 = new Medium("Charles Atant","Voyant reconnu","photo");
+                Medium m9 = new Medium("Jean Caisse","Voyant reconnu","photo");
+                Medium m10 = new Medium("Dieu","Voyant reconnu","photo");
+                Medium m11 = new Medium("Monsieur Voyant","Voyant reconnu","photo");
+                Medium m12 = new Medium("Madame Voyante","Voyante reconnue","photo");
 				
                 monGEMedium.creerMedium(m1);
                 monGEMedium.creerMedium(m2);
@@ -247,6 +244,12 @@ public class Service
         }
     }
     
+    
+                            /****************************
+                            /  SERVICES POUR IHM CLIENT  /
+                            *****************************/
+    
+    
     public void ajouterClient(Client unClient)
     {
         JpaUtil.log("Service : ajouterClient");
@@ -308,6 +311,28 @@ public class Service
         } 
     }
     
-    
+    public List<Medium> listerMediums ()
+    {
+        JpaUtil.log("Service : trouverEmployeAvecPseudoEtMDP");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            MediumDao monGE = new MediumDaoJpa();
+            List<Medium>  mediums = (List<Medium>)monGE.trouverTousMediums();
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return mediums;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
 
 }

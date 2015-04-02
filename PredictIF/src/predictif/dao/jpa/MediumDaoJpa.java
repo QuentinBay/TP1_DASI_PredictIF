@@ -7,7 +7,7 @@ package predictif.dao.jpa;
 
 import predictif.dao.MediumDao;
 import predictif.metier.modele.Medium;
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
@@ -20,17 +20,13 @@ import java.util.Vector;
 
 public class MediumDaoJpa implements MediumDao
 {
-    
 /* --------------------------------------- CONSTRUCTEURS --------------------------------------- */
-    
     public MediumDaoJpa () {}
     
-    
 /* ----------------------------------------- METHODES ------------------------------------------ */
-    
     @Override
     public void creerMedium(Medium unMedium) {
-        JpaUtil.log("debut transaction : creerMedium");
+        JpaUtil.log("MediumDaoJpa : creerMedium");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unMedium);
@@ -56,7 +52,20 @@ public class MediumDaoJpa implements MediumDao
 
     @Override
     public List<Medium> trouverTousMediums() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query= JpaUtil.obtenirEntityManager().createQuery(
+                "select c from Medium c");
+        
+        //query.setParameter("empMotDePasse", unMdp);
+        List<Medium> result = (List<Medium>)query.getResultList();
+        if (!result.isEmpty())
+        {
+            return result;
+        }
+        else
+        {
+            /*ATTENTION : Si on ne trouve pas l employe*/
+            return null;
+        }
     }
     
 }
