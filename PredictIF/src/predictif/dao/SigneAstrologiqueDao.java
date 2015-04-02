@@ -21,6 +21,6 @@ public interface SigneAstrologiqueDao
     public void creerTousLesSignesAstrologiques ();
     //public SigneAstrologique miseAJourSigneAstrologique (SigneAstrologique unSigneAstrologique);
     //public void supprimerSigneAstrologique (SigneAstrologique unSigneAstrologique);
-    public SigneAstrologique trouverSigneAstrologiqueAvecDate (Date uneDate);
+    public SigneAstrologique trouverSigneAstrologiqueAvecMois (int mois);
 }
 

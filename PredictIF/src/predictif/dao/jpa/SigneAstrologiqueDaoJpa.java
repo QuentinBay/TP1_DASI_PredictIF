@@ -7,10 +7,11 @@ package predictif.dao.jpa;
 
 import predictif.dao.SigneAstrologiqueDao;
 import predictif.metier.modele.SigneAstrologique;
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -39,54 +40,37 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
                 em.persist(signe);
             }
             
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public SigneAstrologique trouverSigneAstrologiqueAvecDate(Date uneDate) 
+    public SigneAstrologique trouverSigneAstrologiqueAvecMois(int mois) 
     {
-        int mois = uneDate.getMonth();
-        /*switch(mois) {
-            case 0:
-                    signe = "Capricorne";
-                // Renvoyer signe capricorne
-                    break;
-            case 1:
-                    signe = "Verseau";
-                    break;
-            case 2:
-                    signe = "Poisson";
-                    break;
-            case 3:
-                    signe = "Belier";
-                    break;
-            case 4:
-                    signe = "Taureau";
-                    break;
-            case 5:
-                    signe = "Gemeaux";
-                    break;
-            case 6:
-                    signe = "Cancer";
-                    break;
-            case 7:
-                    signe = "Lion";
-                    break;
-            case 8:
-                    signe = "Vierge";
-                    break;
-            case 9:
-                    signe = "Balance";
-                    break;
-            case 10:
-                    signe = "Scorpion";
-                    break;
-            case 11:
-                    signe = "Sagitaire";
-                    break;*/
-        return null;
+        JpaUtil.log("Transaction : trouverSigneAstrologiqueAvecMois");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            Query q = em.createQuery("select e from SigneAstrologique e where e.mois = :mois");
+            q.setParameter("mois", mois);
+            List<SigneAstrologique> result = (List<SigneAstrologique>)q.getResultList();
+            if (!result.isEmpty())
+            {
+                return (result.get(0));
+            }
+            else
+            {
+                /*ATTENTION : Si on ne trouve pas l employe*/
+                return null;
+            }
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
 }

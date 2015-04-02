@@ -25,9 +25,12 @@ public class Main
 {
     public static void main (String[] args)
     {
+        //Date d = new Date(15,2,1);
+        //System.out.println("Jour : "+d.getDay()+" Mois : "+d.getMonth()+" Année : "+d.getYear());
         Service service = new Service();
         //service.initialiser();
         Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
+        //ATTENTION : Si on ne trouve pas l employe
         if (e!=null)
         {
             System.out.println(e.getPrenom()+" "+e.getNom());
@@ -36,7 +39,7 @@ public class Main
         {
             System.out.println("Employe not found !");
         }
-        
+      
        /* Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 15), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
         service.ajouterClient(c1);

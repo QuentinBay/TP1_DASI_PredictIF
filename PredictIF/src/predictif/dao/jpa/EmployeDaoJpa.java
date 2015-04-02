@@ -63,6 +63,7 @@ public class EmployeDaoJpa implements EmployeDao
         }
         else
         {
+            /*ATTENTION : Si on ne trouve pas l employe*/
             return null;
         }
         

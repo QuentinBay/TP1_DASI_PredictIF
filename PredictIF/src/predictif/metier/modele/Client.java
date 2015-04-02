@@ -5,6 +5,8 @@
  */
 package predictif.metier.modele;
 
+import predictif.dao.SigneAstrologiqueDao;
+import predictif.dao.jpa.SigneAstrologiqueDaoJpa;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,7 +74,12 @@ public class Client implements Serializable {
         return dateNaissance;
     }
     public void setDateNaissance(Date dateNaissance) {
+       
         this.dateNaissance = dateNaissance;
+        //Lier un signe astrologique a un client
+        SigneAstrologiqueDao monGESigne = new SigneAstrologiqueDaoJpa();
+        SigneAstrologique signe = monGESigne.trouverSigneAstrologiqueAvecMois(dateNaissance.getMonth());
+        setSigne(signe);
     }
 
     public String getAddPostale() {

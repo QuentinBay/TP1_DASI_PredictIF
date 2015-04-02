@@ -35,7 +35,7 @@ import predictif.dao.HoroscopeDao;
 import predictif.dao.jpa.HoroscopeDaoJpa;
 import predictif.metier.modele.Horoscope;
 
-import java.util.Date;
+import java.util.Date; // AA/MM/JJ
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -74,25 +74,25 @@ public class Service
                 
 /*--------------------------------CREATION CLIENTS--------------------------------*/
                 ClientDao monGEClient = new ClientDaoJpa();
-                Client c1 = new Client( 'm', "Quentin", "Bayart", new Date(10, 10, 94), 
+                Client c1 = new Client( 'm',  "Bayart","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
-                Client c2 = new Client( 'm', "Adrien", "Menella", new Date(10, 10, 93), 
+                Client c2 = new Client( 'm', "Menella", "Adrien",  new Date(93, 8, 10), 
                                 "123 rue", "060555555", "Adrien@hotmail.fr");
-                Client c3 = new Client( 'm', "Skander", "Mankai", new Date(10, 10, 95), 
+                Client c3 = new Client( 'm', "Mankai", "Skander",  new Date(95, 11, 10), 
                                 "123 rue", "060555555", "Skander@hotmail.fr");
-                Client c4 = new Client( 'm', "Kevin", "Bulme", new Date(1, 2, 94), 
+                Client c4 = new Client( 'm', "Bulme", "Kevin",  new Date(93, 1, 2), 
                                 "123 rue", "060555555", "Kevin@hotmail.fr");
-                Client c5 = new Client( 'm', "Alexis", "Papin", new Date(10, 12, 94), 
+                Client c5 = new Client( 'm',"Papin", "Alexis",  new Date(94, 2, 12), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
-                Client c6 = new Client( 'm', "Lisa", "Leo", new Date(10, 5, 94), 
+                Client c6 = new Client( 'm', "Marin", "Leo", new Date(94, 0, 5), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
-                Client c7 = new Client( 'm', "Julie", "Bert", new Date(4, 8, 94), 
+                Client c7 = new Client( 'm', "Bert", "Julie", new Date(94, 4, 8), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
-                Client c8 = new Client( 'm', "Jean", "Uhl", new Date(7, 9, 94), 
+                Client c8 = new Client( 'm', "Uhl", "Jean", new Date(94, 7, 9), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
-                Client c9 = new Client( 'm', "Charles", "Mer", new Date(10, 4, 94), 
+                Client c9 = new Client( 'm', "Mer", "Charles", new Date(94, 10, 4), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
-                Client c10 = new Client( 'm', "Eric", "Kein", new Date(10, 2, 94), 
+                Client c10 = new Client( 'm', "Kein", "Eric", new Date(94, 10, 2), 
                                 "123 rue", "060555555", "papin@hotmail.fr");
                 monGEClient.creerClient(c1);
                 monGEClient.creerClient(c2);
@@ -258,10 +258,12 @@ public class Service
             try 
             {
                 JpaUtil.ouvrirTransaction();
-
+                
                 ClientDao monGestionnaireEntites = new ClientDaoJpa();
                 monGestionnaireEntites.creerClient(unClient);
-
+                
+                
+                
                 JpaUtil.validerTransaction();
             }
             catch (Exception ex) 
@@ -306,4 +308,6 @@ public class Service
         } 
     }
     
+    
+
 }
