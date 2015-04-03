@@ -40,14 +40,14 @@ public class Main
         Service service = new Service();
         //service.initialiser();
         
-        Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
+       /* Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
         service.ajouterClient(c1);
         service.affecterClientAEmploye(c1);
         //System.out.println();
         service.envoiMailClient(c1, new SimulationEnvoyeurMail());
         
-       /* Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
+        Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
         //ATTENTION : Si on ne trouve pas l employe
         if (e!=null)
         {
@@ -67,7 +67,12 @@ public class Main
             System.out.println(it.next().toString());
         }
         
-        System.out.println("# Session interactive");
+        System.out.println("# Session interactive");*/
+        
+                            /****************************
+                            /  SERVICES POUR IHM CLIENT  /
+                            *****************************/        
+        
         System.out.println("## Inscription client");
         System.out.println("### Informations de base");
         String civilite = Saisie.lireChaine(" - Civilite : ");
@@ -102,7 +107,19 @@ public class Main
 
         service.choisirMediums(c1, mediumsFavoris);
         System.out.println("Mediums choisis : ");
-        displayData(subToString(c1.getMediums().toArray()));*/
+        displayData(subToString(c1.getMediums().toArray()));
+        
+        
+        service.affecterClientAEmploye(c1);
+        System.out.println("INFORMATION : Le client a été ajouté à l'employé qui en a le moins.");
+        
+        System.out.println("Envoi d'un mail au client");
+        service.envoiMailClient(c1, new SimulationEnvoyeurMail());
+        System.out.println();
+        
+                           /******************************
+                           /  SERVICES POUR IHM EMPLOYE   /
+                           *******************************/
         
     }
     
