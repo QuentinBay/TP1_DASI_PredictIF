@@ -28,6 +28,7 @@ import java.util.Vector;
 import java.util.Iterator;
 import predictif.dao.MediumDao;
 import predictif.dao.jpa.MediumDaoJpa;
+import predictif.util.SimulationEnvoyeurMail;
 /**
  *
  * @author qbayart
@@ -41,11 +42,12 @@ public class Main
         
         Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
+        service.ajouterClient(c1);
         service.affecterClientAEmploye(c1);
         //System.out.println();
+        service.envoiMailClient(c1, new SimulationEnvoyeurMail());
         
-        
-        /*Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
+       /* Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
         //ATTENTION : Si on ne trouve pas l employe
         if (e!=null)
         {

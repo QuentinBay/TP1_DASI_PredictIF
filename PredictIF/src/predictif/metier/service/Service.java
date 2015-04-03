@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 public class Service 
 {
 /*------------------------------------ATTRIBUTS-----------------------------------*/
-
+    private static String ADRESSE_EXPEDITEUR = "Jean-Charles@predictif.com";
     
 /*----------------------------------CONSTRUCTEURS---------------------------------*/
     public Service () { }
@@ -363,6 +363,15 @@ public class Service
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    
+    public void envoiMailClient (Client client, EnvoyeurMail envoyeur)
+    {
+        String contenu = "Bonjour " + client.getPrenom() + " " + client.getNom() + " et bienvenue chez Predict'IF ! \n";
+        contenu += "Votre numero client est : " + client.getNumClient() + "\n";
+        contenu += "Votre horoscope est actuellement étudié par vos médiums favoris ! \n";
+        envoyeur.envoi(ADRESSE_EXPEDITEUR, client.getAddElectronique(), "Bienvenue sur Predict'IF", contenu);
+    }
+    
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
