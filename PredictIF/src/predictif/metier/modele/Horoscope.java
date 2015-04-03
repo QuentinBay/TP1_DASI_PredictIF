@@ -85,6 +85,15 @@ public class Horoscope implements Serializable {
     }
     
 /* ----------------------------------------- METHODES ------------------------------------------ */
+    public void ajouterPrediction(Prediction unePrediction)
+    {
+        predictions.add(unePrediction);
+    }
+    
+    public void supprimerPrediction(Prediction unePrediction)
+    {
+        predictions.remove(unePrediction);
+    }
     
     @Override
     public int hashCode() {
@@ -108,6 +117,32 @@ public class Horoscope implements Serializable {
 
     @Override
     public String toString() {
-        return "Horoscope n°"+id+" datant du "+date;
+        String contenu="Horoscope n°"+id+" datant du "+date+ " : \n";
+        if(!predictions.isEmpty())
+        {
+            for(Prediction p : predictions) 
+            {
+                contenu+="["+p.getNumero()+"] ";
+                contenu += p.getType()+" (";
+                for(int i = 0; i < p.getPositivite(); i++) {
+                    contenu += p.getIcone();
+                }
+                contenu += ") : " + p.getPrevision();
+
+                if(p.getType().equals("Sante"))
+                {
+                    Sante s = (Sante)p;
+                    contenu += "\nNotre conseil : " + s.getConseil();
+                }
+                else if(p.getType().equals("Amour"))
+                {
+                    Amour a = (Amour)p;
+                    contenu += "\nVotre signe partenaire : " + a.getPartenaire().getSigne();
+                }
+                contenu += "\n\n";
+
+            }
+        }
+        return contenu;
     }
 }

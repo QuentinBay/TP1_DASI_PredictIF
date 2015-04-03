@@ -37,6 +37,7 @@ import predictif.dao.jpa.HoroscopeDaoJpa;
 import predictif.metier.modele.Horoscope;
 
 import java.util.Date; // AA/MM/JJ
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -630,6 +631,29 @@ public class Service
         }
     }
     
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium)
+    {
+        JpaUtil.log("Service : creerHoroscope");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            HoroscopeDao monGE = new HoroscopeDaoJpa();
+            monGE.creerHoroscope(horoscope, client, medium);
+            
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return horoscope;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     /**
      * Génère le contenu d'un email à partir d'un horoscope sans rien envoyer
      * @param horoscope L'horoscope utilisé
@@ -680,12 +704,12 @@ public class Service
             if(p.getType().equals("Sante"))
             {
                 Sante s = (Sante)p;
-                contenu += "Notre conseil : " + s.getConseil();
+                contenu += "\nNotre conseil : " + s.getConseil();
             }
             else if(p.getType().equals("Amour"))
             {
                 Amour a = (Amour)p;
-                contenu += "Votre signe partenaire : " + a.getPartenaire().getSigne();
+                contenu += "\nVotre signe partenaire : " + a.getPartenaire().getSigne();
             }
             contenu += "\n\n";
 
@@ -698,12 +722,83 @@ public class Service
      * @param horoscope Le nouvel horoscope à envoyer
      * @param envoyeur Le service envoyant l'email
      */
-    public void envoiHoroscopeClient (Horoscope horoscope, EnvoyeurMail envoyeur){
+    public void envoiHoroscopeClient (Horoscope horoscope, EnvoyeurMail envoyeur)
+    {
         envoyeur.envoi(
                 ADRESSE_EXPEDITEUR,
                 horoscope.getClient().getAddElectronique(),
                 "Votre horoscope",
                 genererContenuMail(horoscope)
         );
+    }
+    
+    public List<Horoscope> listerHistoriqueClient (Client client)
+    {
+        JpaUtil.log("Service : listerHistoriqueClient");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            HoroscopeDao monGE = new HoroscopeDaoJpa();
+            List<Horoscope>  horoscopes = (List<Horoscope>)monGE.trouverTousLesHoroscopes(client);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return horoscopes;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public Horoscope ajouterPrediction(Horoscope h, Prediction p)
+    {
+        JpaUtil.log("Service : ajouterPrediction");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            HoroscopeDao monGE = new HoroscopeDaoJpa();
+            monGE.ajouterPrediction(h, p);
+            
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return h;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public Horoscope supprimerPrediction(Horoscope h, Prediction p)
+    {
+        JpaUtil.log("Service : ajouterPrediction");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            HoroscopeDao monGE = new HoroscopeDaoJpa();
+            monGE.supprimerPrediction(h, p);
+            
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return h;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

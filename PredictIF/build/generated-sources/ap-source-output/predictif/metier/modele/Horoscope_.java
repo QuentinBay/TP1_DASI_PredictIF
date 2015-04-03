@@ -9,7 +9,7 @@ import predictif.metier.modele.Client;
 import predictif.metier.modele.Medium;
 import predictif.metier.modele.Prediction;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-04-03T09:31:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-04-03T12:32:10")
 @StaticMetamodel(Horoscope.class)
 public class Horoscope_ { 
 

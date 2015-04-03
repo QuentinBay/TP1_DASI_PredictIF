@@ -43,6 +43,8 @@ public class Main
     public static void main (String[] args)
     {
         Service service = new Service();
+        Client c = service.trouverClientAvecId(201);
+        displayData(subToString(service.listerHistoriqueClient(c).toArray()));
         //service.initialiser();
         //Prediction pAm = service.trouverPredictionAmourAvecId(43);
         //System.out.println(pAm.getPrevision());
@@ -79,7 +81,7 @@ public class Main
                             /  SERVICES POUR IHM CLIENT  /
                             *****************************/        
         
-        System.out.println("## Inscription client");
+        /*System.out.println("## Inscription client");
         System.out.println("### Informations de base");
         String civilite = Saisie.lireChaine(" - Civilite : ");
         String nom = Saisie.lireChaine(" - Nom : ");
@@ -122,7 +124,7 @@ public class Main
         System.out.println("Envoi d'un mail au client");
         System.out.println("");
         service.envoiMailClient(c1, new SimulationEnvoyeurMail());
-        System.out.println();
+        System.out.println();*/
         
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
@@ -142,31 +144,61 @@ public class Main
         Client client = service.trouverClientAvecId(clientId);
         System.out.println();
         
+        System.out.println("###Historique des horoscopes");
+        displayData(subToString(service.listerHistoriqueClient(client).toArray()));
+        System.out.println();
+        
         System.out.println("###Choix d'un medium");
         displayData(subToString(service.listerMediumsClient(client).toArray()));
         int mediumId = Saisie.lireInteger(" - Numero du medium : ");
         Medium medium = service.trouverMediumAvecId(mediumId);
         System.out.println();
         
+        Horoscope horoscope = new Horoscope(new Date(15,04,03));
+        horoscope= service.creerHoroscope(horoscope, client, medium);
+        
         System.out.println("Choix Prediction Travail");
         displayData(subToString(service.listerPredictionsTriees().toArray()));
         int pAmId = Saisie.lireInteger(" -  Numero de la prediction amour : ");
         Prediction pAm = service.trouverPredictionAmourAvecId(pAmId);
+        horoscope= service.ajouterPrediction(horoscope, pAm);
+        System.out.println("Horoscope en cours :");
+        System.out.println(horoscope);
         
         int pStId = Saisie.lireInteger(" -  Numero de la prediction sante : ");
         Prediction pSt = service.trouverPredictionSanteAvecId(pStId);
+        horoscope= service.ajouterPrediction(horoscope, pSt);
+        System.out.println("Horoscope en cours :");
+        System.out.println(horoscope);
         
         int pTrId = Saisie.lireInteger(" -  Numero de la prediction travail : ");
         Prediction pTr = service.trouverPredictionTravailAvecId(pTrId);
         System.out.println();
-        Horoscope horoscope = new Horoscope(new Date(2015,04,03));
-        horoscope= service.creerHoroscope(horoscope, client, medium, pAm, pSt, pTr);
+        System.out.println(horoscope);
+        horoscope= service.ajouterPrediction(horoscope, pTr);
+        System.out.println("Horoscope en cours :");
+        System.out.println(horoscope);
+        
+        int pSupprId = Saisie.lireInteger(" -  Numero de la prediction à supprimer : ");
+        Prediction pSuppr = service.trouverPredictionTravailAvecId(pSupprId);
+        System.out.println();
+        System.out.println(horoscope);
+        horoscope= service.supprimerPrediction(horoscope, pSuppr);
+        System.out.println("Horoscope en cours :");
+        System.out.println(horoscope);
+        
+        int pAjId = Saisie.lireInteger(" -  Numero de la prediction à rajouter : ");
+        Prediction pAj = service.trouverPredictionTravailAvecId(pAjId);
+        System.out.println();
+        System.out.println(horoscope);
+        horoscope= service.ajouterPrediction(horoscope, pAj);
+        System.out.println("Horoscope en cours :");
         System.out.println(horoscope);
         
         System.out.println("Envoi de l'horoscope au client");
         System.out.println("");
         service.envoiHoroscopeClient(horoscope, new SimulationEnvoyeurMail());
-        
+        System.out.println("");
         System.out.println("Fin de la simulation");
     }
     

@@ -69,8 +69,37 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
 
 
     @Override
-    public void ajouterPrediction(Prediction unePrediction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Horoscope ajouterPrediction(Horoscope horoscope, Prediction unePrediction) {
+        JpaUtil.log("HoroscopeDaoJpa : ajouterPrediction");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            //Associe un client a l horoscope
+            horoscope.ajouterPrediction(unePrediction);
+            em.merge(horoscope);
+            
+            return horoscope;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    @Override
+    public Horoscope supprimerPrediction(Horoscope horoscope, Prediction unePrediction) {
+        JpaUtil.log("HoroscopeDaoJpa : ajouterPrediction");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            //Associe un client a l horoscope
+            horoscope.supprimerPrediction(unePrediction);
+            em.merge(horoscope);
+            
+            return horoscope;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -87,6 +116,28 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } 
+    }
+
+    @Override
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium) {
+        JpaUtil.log("HoroscopeDaoJpa : creerHoroscope");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            em.persist(horoscope);
+
+            
+            //Associe un client a l horoscope
+            horoscope.setClient(client);
+            
+            //Associe un medium a la prediction
+            horoscope.setMedium(medium);
+            em.merge(horoscope);
+            return horoscope;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
 

@@ -19,9 +19,10 @@ import predictif.metier.modele.Travail;
  */
 public interface HoroscopeDao 
 {
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium);
     public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium, Prediction predAmour, Prediction predSante, Prediction predTravail);
     public Horoscope trouverHoroscopeAvecId(long id);
-    //public void supprimerHoroscope(Horoscope unHoroscope);
-    public void ajouterPrediction(Prediction unePrediction);
+    public Horoscope supprimerPrediction(Horoscope horoscope, Prediction unePrediction);
+    public Horoscope ajouterPrediction(Horoscope horoscope, Prediction unePrediction);
     public List<Horoscope> trouverTousLesHoroscopes(Client client);
 }
