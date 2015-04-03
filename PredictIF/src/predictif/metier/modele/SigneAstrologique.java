@@ -51,40 +51,40 @@ public class SigneAstrologique implements Serializable {
     {
         mois=unMois;
         switch(mois) {
-            case 1:
+            case 0:
                     signe = "Capricorne";
                     break;
-            case 2:
+            case 1:
                     signe = "Verseau";
                     break;
-            case 3:
+            case 2:
                     signe = "Poisson";
                     break;
-            case 4:
+            case 3:
                     signe = "Belier";
                     break;
-            case 5:
+            case 4:
                     signe = "Taureau";
                     break;
-            case 6:
+            case 5:
                     signe = "Gemeaux";
                     break;
-            case 7:
+            case 6:
                     signe = "Cancer";
                     break;
-            case 8:
+            case 7:
                     signe = "Lion";
                     break;
-            case 9:
+            case 8:
                     signe = "Vierge";
                     break;
-            case 10:
+            case 9:
                     signe = "Balance";
                     break;
-            case 11:
+            case 10:
                     signe = "Scorpion";
                     break;
-            case 12:
+            case 11:
                     signe = "Sagitaire";
                     break;
         }

@@ -8,6 +8,7 @@ import predictif.metier.modele.Client;
 import predictif.metier.modele.Medium;
 
 import java.util.List;
+import predictif.metier.modele.Employe;
 
 /**
  * 
@@ -19,4 +20,5 @@ public interface ClientDao {
     public void supprimerClient(Client unClient);
     public Client trouverClientAvecNomEtPrenom(String nom, String prenom);
     public Client trouverClientAvecId(long idClient);
+    public List<Client> classesPourChoixEmploye(Employe employe);
 }

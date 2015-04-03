@@ -16,6 +16,7 @@ public interface EmployeDao {
     public Employe miseAJourEmploye(Employe unEmploye);
     public void supprimerEmploye(Employe unEmploye);
     public Employe trouverEmployeAvecPseudoEtMdp(String unPseudo, String unMdp);
-    //public void ajouterClient (Client unClient);
+    public Employe moinsDeClients();
+    public void ajouterClient (Employe emp,Client unClient);
     //public void supprimerClient (Client unClient);
 }

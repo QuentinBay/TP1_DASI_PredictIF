@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Query;
+import predictif.metier.modele.Client;
 
 /**
  *
@@ -69,4 +70,36 @@ public class EmployeDaoJpa implements EmployeDao
         
     }
     
+    /**
+     * Trouve l employe qui a le moins de clients
+     * @return l employe
+     */
+    @Override
+    public Employe moinsDeClients()
+    {
+        JpaUtil.log("debut transaction : creerEmploye");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            Query q = em.createQuery("SELECT e FROM Employe e ORDER BY size(e.clients)").setMaxResults(1);
+            return (Employe) q.getSingleResult();
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void ajouterClient (Employe emp,Client unClient)
+    {
+        JpaUtil.log("EmployeDaoJpa : ajouterClient");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            
+            //Lier une liste de mediums a un client
+            emp.addClient(unClient);
+            em.merge(emp);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

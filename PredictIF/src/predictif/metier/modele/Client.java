@@ -38,11 +38,16 @@ public class Client implements Serializable {
     @ManyToOne //Lien unidirectionnel
     private SigneAstrologique signe;
     
+    //@ManyToOne //Lien bidirectionnel
+    //private Employe employe;
+    
     @ManyToMany //Lien unidirectionnel
     private List<Medium> mediums;
 
     @OneToMany(mappedBy="client") //Lien bidirectionnel
     private List<Horoscope> horoscopes;
+    
+    
     
     /*-------------------------- GETTERS & SETTERS ---------------------------*/
     public Long getNumClient() {
@@ -127,7 +132,20 @@ public class Client implements Serializable {
         this.horoscopes = horoscopes;
     }
     
-    
+    /**
+     * @return Son Employe Referent
+     */
+    /*public Employe getEmployeReferent() {
+        return employe;
+    }
+
+    /**
+     * @param employe Son nouvel employe referent
+     */
+    /*public void setEmployeReferent(Employe employe) {
+        this.employe = employe;
+    }*/
+
     
     /* --------------------------- CONSTRUCTEURS ---------------------------- */
     public Client() {}
@@ -145,6 +163,7 @@ public class Client implements Serializable {
         numTelephone = aNumTelephone;
         addElectronique = anAddElectronique;
         signe = null;
+        //employe=null;
         mediums = new Vector();
     }
     
@@ -172,7 +191,8 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         String retour = "Client n°" + numClient + " : \nPrenom : " + prenom + "\nNom : " + nom 
-                            + "\nSigne astrologique : " + signe.getSigne() + "\nMediums : \n";
+                            + "\nSigne astrologique : " + signe.getSigne() 
+                            + "\nMediums : \nEmploye referent : ";//+employe.getPrenom();
         for(Medium m : this.getMediums()) {
             retour +=" - "+m.getPseudo()+"\n";
         }

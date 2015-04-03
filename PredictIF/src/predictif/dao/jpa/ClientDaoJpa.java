@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
+import predictif.metier.modele.Employe;
 import predictif.metier.modele.Medium;
 
 /**
@@ -72,7 +73,13 @@ public class ClientDaoJpa implements ClientDao {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-
+    
+    /**
+     * Retrouve un client par son nom et son prenom
+     * @param nom Son nom
+     * @param prenom Son prenom
+     * @return Le client
+     */
     @Override
     public Client trouverClientAvecNomEtPrenom(String nom, String prenom) {
         JpaUtil.log("ClientDaoJpa : trouverClientAvecNom");
@@ -95,12 +102,37 @@ public class ClientDaoJpa implements ClientDao {
         }
     }
     
+    /**
+     * @param idClient Id du client
+     * @return Le client
+     */
     @Override
     public Client trouverClientAvecId(long idClient) {
         JpaUtil.log("ClientDaoJpa : trouverClientAvecId");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             return em.find(Client.class, idClient);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    /**
+     * Retourne la liste des clients classes pour un employe de sorte que le premier soit le client ayant le moins
+     * d'horoscopes
+     * @param employe L'employe
+     * @return Les clients dans le bon ordre
+     */
+    public List<Client> classesPourChoixEmploye(Employe employe) {
+        JpaUtil.log("ClientDaoJpa : classesPourEmploye");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            Query q = em.createQuery("select c from Client c where c.employeReferent = :emp order by size(c.horoscopes)");
+            q.setParameter("emp", employe);
+            return (List<Client>) q.getResultList();
         } 
         catch (Exception ex) 
         {

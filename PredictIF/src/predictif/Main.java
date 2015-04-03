@@ -36,13 +36,15 @@ public class Main
 {
     public static void main (String[] args)
     {
-        //Date d = new Date(15,2,1);
-        //System.out.println("Jour : "+d.getDay()+" Mois : "+d.getMonth()+" Année : "+d.getYear());
         Service service = new Service();
-        //displayData(subToString(service.listerMediums().toArray()));
-        //Medium m = service.trouverMediumAvecId(23);
-        //System.out.println(m);
         //service.initialiser();
+        
+        Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
+                                "123 rue", "060555555", "Quentin@hotmail.fr");
+        service.affecterClientAEmploye(c1);
+        //System.out.println();
+        
+        
         /*Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
         //ATTENTION : Si on ne trouve pas l employe
         if (e!=null)
@@ -61,7 +63,7 @@ public class Main
         {
             
             System.out.println(it.next().toString());
-        }*/
+        }
         
         System.out.println("# Session interactive");
         System.out.println("## Inscription client");
@@ -98,7 +100,7 @@ public class Main
 
         service.choisirMediums(c1, mediumsFavoris);
         System.out.println("Mediums choisis : ");
-        displayData(subToString(c1.getMediums().toArray()));
+        displayData(subToString(c1.getMediums().toArray()));*/
         
     }
     

@@ -34,7 +34,7 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
             EntityManager em = JpaUtil.obtenirEntityManager();
             
             SigneAstrologique signe;
-            for(int i=1; i<=12; i++)
+            for(int i=0; i<=11; i++)
             {
                 signe=new SigneAstrologique(i);
                 em.persist(signe);
@@ -53,8 +53,9 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
         JpaUtil.log("Transaction : trouverSigneAstrologiqueAvecMois");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
-            Query q = em.createQuery("select e from SigneAstrologique e where e.mois = :mois");
-            q.setParameter("mois", mois);
+            Query q = em.createQuery("select e from SigneAstrologique e where e.mois =:eMois");
+            q.setParameter("eMois", mois);
+            
             List<SigneAstrologique> result = (List<SigneAstrologique>)q.getResultList();
             if (!result.isEmpty())
             {

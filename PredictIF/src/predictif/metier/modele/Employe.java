@@ -22,6 +22,10 @@ import java.util.Iterator;
 @Entity
 public class Employe implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    @OneToMany
+    private List<Client> clients;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,8 +34,7 @@ public class Employe implements Serializable {
     private String nom;
     private String prenom;
     
-    @OneToMany
-    private List<Client> clients; 
+    
 
     /*------------------------------------ GETTERS & SETTERS ----------------------------------*/
     public Long getId() {
@@ -78,7 +81,7 @@ public class Employe implements Serializable {
         motDePasse=unMotDePasse;
         nom=unNom;
         prenom=unPrenom;
-        clients=new Vector();
+        clients=new Vector<Client>();
     }
 
     /* --------------------------------------- METHODES --------------------------------------- */
@@ -104,7 +107,7 @@ public class Employe implements Serializable {
 
     @Override
     public String toString() {
-        return "predictif.metier.modele.Employe[ id=" + id + " ]";
+        return "Employe n°"+id+" : "+prenom+" "+nom+"\n"+"Login : "+pseudo+" | Mdp : "+motDePasse+"\n";
     }
     
     public void addClient (Client unClient)
