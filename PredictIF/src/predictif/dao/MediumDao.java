@@ -16,6 +16,7 @@ public interface MediumDao {
     public Medium miseAJourMedium(Medium unMedium);
     public void supprimerMedium(Medium unMedium);
     public Medium trouverMediumAvecPseudo(String unPseudo);
+    public Medium trouverMediumAvecID(long unID);
     public List<Medium> trouverTousMediums();
     
 }

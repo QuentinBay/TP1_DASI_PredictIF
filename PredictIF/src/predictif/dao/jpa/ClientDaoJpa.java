@@ -9,11 +9,11 @@ import predictif.dao.ClientDao;
 import predictif.dao.SigneAstrologiqueDao;
 import predictif.metier.modele.Client;
 import predictif.metier.modele.SigneAstrologique;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
+import predictif.metier.modele.Medium;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ClientDaoJpa implements ClientDao {
 
     @Override
     public void creerClient(Client unClient) {
-        JpaUtil.log("debut transaction : ClientDao");
+        JpaUtil.log("ClientDaoJpa : creerClient");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unClient);
@@ -39,7 +39,6 @@ public class ClientDaoJpa implements ClientDao {
             int moisClient = unClient.getDateNaissance().getMonth();
             SigneAstrologique signe = monGESigne.trouverSigneAstrologiqueAvecMois(moisClient);
             unClient.setSigne(signe);
-            //em.persist(unClient);
             
         } catch (Exception ex) {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,30 +46,65 @@ public class ClientDaoJpa implements ClientDao {
     }
 
     @Override
-    public Client miseAJourClient(Client unClient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void choisirMediums(Client unClient, List<Medium> mediums) {
+        JpaUtil.log("ClientDaoJpa : choisirMediums");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            
+            //Lier une liste de mediums a un client
+            unClient.addMediums(mediums);
+            em.merge(unClient);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void supprimerClient(Client unClient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JpaUtil.log("ClientDaoJpa : supprimerClient");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+
+            em.remove(unClient);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
 
     @Override
-    public Client trouverClientAvecNom(String unNom) {
-        Query query= JpaUtil.obtenirEntityManager().createQuery(
-                "select c from Client c where c.nom=:clientNom ");
-        
-        query.setParameter("clientNom", unNom);
-        //query.setParameter("empMotDePasse", unMdp);
-        List<Client> result = (List<Client>)query.getResultList();
-        if (!result.isEmpty())
+    public Client trouverClientAvecNomEtPrenom(String nom, String prenom) {
+        JpaUtil.log("ClientDaoJpa : trouverClientAvecNom");
+        try {
+            Query query= JpaUtil.obtenirEntityManager().createQuery(
+                    "select e from Client e where e.nom = :nom and e.prenom = :prenom");
+            query.setParameter("nom", nom);
+            query.setParameter("prenom", prenom);
+            List<Client> result = (List<Client>)query.getResultList();
+            if (!result.isEmpty())
+            {
+                return (result.get(0));
+            }
+            return null;
+        } 
+        catch (Exception ex) 
         {
-            return (result.get(0));
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        else
+    }
+    
+    @Override
+    public Client trouverClientAvecId(long idClient) {
+        JpaUtil.log("ClientDaoJpa : trouverClientAvecId");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            return em.find(Client.class, idClient);
+        } 
+        catch (Exception ex) 
         {
-            /*ATTENTION : Si on ne trouve pas l employe*/
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.Vector;
+import predictif.metier.modele.Client;
 
 /**
  *
@@ -48,6 +49,19 @@ public class MediumDaoJpa implements MediumDao
     @Override
     public Medium trouverMediumAvecPseudo(String unPseudo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public Medium trouverMediumAvecID(long unID){
+        JpaUtil.log("MediumDaoJpa : trouverMediumAvecID");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            return em.find(Medium.class, unID);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override

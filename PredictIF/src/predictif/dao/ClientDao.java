@@ -5,6 +5,9 @@
  */
 package predictif.dao;
 import predictif.metier.modele.Client;
+import predictif.metier.modele.Medium;
+
+import java.util.List;
 
 /**
  * 
@@ -12,7 +15,8 @@ import predictif.metier.modele.Client;
  */
 public interface ClientDao {
     public void creerClient(Client unClient);
-    public Client miseAJourClient(Client unClient);
+    public void choisirMediums(Client unClient, List<Medium> mediums);
     public void supprimerClient(Client unClient);
-    public Client trouverClientAvecNom(String unNom);
+    public Client trouverClientAvecNomEtPrenom(String nom, String prenom);
+    public Client trouverClientAvecId(long idClient);
 }

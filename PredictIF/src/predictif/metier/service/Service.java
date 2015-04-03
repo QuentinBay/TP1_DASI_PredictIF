@@ -257,34 +257,91 @@ public class Service
         {
             JpaUtil.init();
             JpaUtil.creerEntityManager();
-
-            try 
-            {
-                JpaUtil.ouvrirTransaction();
-                
-                ClientDao monGestionnaireEntites = new ClientDaoJpa();
-                monGestionnaireEntites.creerClient(unClient);
-                
-                
-                
-                JpaUtil.validerTransaction();
-            }
-            catch (Exception ex) 
-            {
-                JpaUtil.annulerTransaction();
-                Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally
-            {
-                JpaUtil.fermerEntityManager();
-            }
+            JpaUtil.ouvrirTransaction();
+            ClientDao monGestionnaireEntites = new ClientDaoJpa();
+            monGestionnaireEntites.creerClient(unClient);
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
         }
-        catch (Exception e) 
+        catch (Exception ex) 
         {
-            //Probleme de creation du contexte de persistance
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, e);
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
+    public List<Medium> listerMediums ()
+    {
+        JpaUtil.log("Service : trouverEmployeAvecPseudoEtMDP");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            MediumDao monGE = new MediumDaoJpa();
+            List<Medium>  mediums = (List<Medium>)monGE.trouverTousMediums();
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return mediums;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+
+    public void choisirMediums(Client unClient, List<Medium> mediums)
+    {
+        JpaUtil.log("Service : choisirMediums");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            ClientDao monGE = new ClientDaoJpa();
+            monGE.choisirMediums(unClient, mediums);
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Medium trouverMediumAvecId(long unId)
+    {
+        JpaUtil.log("Service : trouverMediumAvecId");
+        Medium m;
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            MediumDao monGE = new MediumDaoJpa();
+            m = monGE.trouverMediumAvecID(unId);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return m;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
+                           /******************************
+                           /  SERVICES POUR IHM EMPLOYE   /
+                           *******************************/
     
     public Employe trouverEmployeAvecPseudoEtMDP(String unPseudo, String unMDP)
     {
@@ -311,28 +368,4 @@ public class Service
         } 
     }
     
-    public List<Medium> listerMediums ()
-    {
-        JpaUtil.log("Service : trouverEmployeAvecPseudoEtMDP");
-        try 
-        {
-            JpaUtil.init();
-            JpaUtil.creerEntityManager();
-            JpaUtil.ouvrirTransaction();
-
-            MediumDao monGE = new MediumDaoJpa();
-            List<Medium>  mediums = (List<Medium>)monGE.trouverTousMediums();
-
-            JpaUtil.validerTransaction();
-            JpaUtil.fermerEntityManager();
-            return mediums;
-        }
-        catch (Exception ex) 
-        {
-            JpaUtil.annulerTransaction();
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } 
-    }
-
 }

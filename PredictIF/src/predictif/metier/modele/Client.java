@@ -168,21 +168,22 @@ public class Client implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
-        return "predictif.Client[ numClient=" + numClient + " ]";
+        String retour = "Client n°" + numClient + " : \nPrenom : " + prenom + "\nNom : " + nom 
+                            + "\nSigne astrologique : " + signe.getSigne() + "\nMediums : \n";
+        for(Medium m : this.getMediums()) {
+            retour +=" - "+m.getPseudo()+"\n";
+        }
+        return retour;
     }
     
-    public void addMedium ( Medium unMedium )
+    public void addMediums (List<Medium> desMediums )
     {
-        this.mediums.add(unMedium);
+        mediums=desMediums;
     }
     
-    public void removeMedium (Medium unMedium)
-    {
-        this.mediums.remove(unMedium);
-    }
     
     public void addHoroscope ( Horoscope unHoroscope )
     {

@@ -87,6 +87,6 @@ public class Medium implements Serializable {
 
     @Override
     public String toString() {
-        return "predictif.metier.modele.Medium[ id=" + id + " ]";
+        return "Medium n°"+id+" : "+pseudo+"\n"+description+"\n"+photo+"\n";
     }
 }
