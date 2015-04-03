@@ -140,4 +140,21 @@ public class ClientDaoJpa implements ClientDao {
             return null;
         }
     }
+    
+    @Override
+    public List<Medium> listerMediumsFavoris(Client client)
+    {
+        JpaUtil.log("ClientDaoJpa : listerMediumsFavoris");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            Query q = em.createQuery("select c.mediums from Client c where c.numClient = :unID");
+            q.setParameter("unID", client.getNumClient());
+            return (List<Medium>) q.getResultList();
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

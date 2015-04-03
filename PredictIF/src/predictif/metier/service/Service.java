@@ -372,6 +372,7 @@ public class Service
         envoyeur.envoi(ADRESSE_EXPEDITEUR, client.getAddElectronique(), "Bienvenue sur Predict'IF", contenu);
     }
     
+    
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
@@ -448,4 +449,54 @@ public class Service
             return null;
         } 
     }
+    
+    public Client trouverClientAvecId(long unId)
+    {
+        JpaUtil.log("Service : trouverClientAvecId");
+        Medium m;
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            ClientDao monGE = new ClientDaoJpa();
+            Client c = monGE.trouverClientAvecId(unId);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return c;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
+    public List<Medium> listerMediumsClient (Client client)
+    {
+        JpaUtil.log("Service : listerMediumsClient");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            ClientDao monGE = new ClientDaoJpa();
+            List<Medium>  mediums = (List<Medium>)monGE.listerMediumsFavoris(client);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return mediums;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
 }

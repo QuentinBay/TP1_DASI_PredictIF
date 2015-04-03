@@ -21,4 +21,5 @@ public interface ClientDao {
     public Client trouverClientAvecNomEtPrenom(String nom, String prenom);
     public Client trouverClientAvecId(long idClient);
     public List<Client> classesPourChoixEmploye(Employe employe);
+    public List<Medium> listerMediumsFavoris(Client client);
 }

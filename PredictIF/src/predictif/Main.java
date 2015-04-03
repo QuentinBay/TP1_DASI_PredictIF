@@ -131,6 +131,16 @@ public class Main
         
         System.out.println("###Choix d'un client");
         displayData(subToString(service.listerClients(e).toArray()));
+        int clientId = Saisie.lireInteger(" - Numero du client : ");
+        Client client = service.trouverClientAvecId(clientId);
+        System.out.println();
+        
+        System.out.println("###Choix d'un medium");
+        displayData(subToString(service.listerMediumsClient(client).toArray()));
+        int mediumId = Saisie.lireInteger(" - Numero du medium : ");
+        Medium medium = service.trouverMediumAvecId(mediumId);
+        System.out.println();
+        
     }
     
     private static String[] subToString(Object[] objects) {
