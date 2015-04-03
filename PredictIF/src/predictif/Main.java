@@ -29,6 +29,7 @@ import java.util.Iterator;
 import predictif.dao.MediumDao;
 import predictif.dao.jpa.MediumDaoJpa;
 import predictif.metier.modele.Amour;
+import predictif.metier.modele.Horoscope;
 import predictif.metier.modele.Prediction;
 import predictif.metier.modele.Sante;
 import predictif.metier.modele.Travail;
@@ -43,8 +44,8 @@ public class Main
     {
         Service service = new Service();
         //service.initialiser();
-        Prediction pAm = service.trouverPredictionAmourAvecId(43);
-        System.out.println(pAm.getPrevision());
+        //Prediction pAm = service.trouverPredictionAmourAvecId(43);
+        //System.out.println(pAm.getPrevision());
        /* Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
         service.ajouterClient(c1);
@@ -78,7 +79,7 @@ public class Main
                             /  SERVICES POUR IHM CLIENT  /
                             *****************************/        
         
-        /*System.out.println("## Inscription client");
+        System.out.println("## Inscription client");
         System.out.println("### Informations de base");
         String civilite = Saisie.lireChaine(" - Civilite : ");
         String nom = Saisie.lireChaine(" - Nom : ");
@@ -119,14 +120,15 @@ public class Main
         System.out.println("INFORMATION : Le client a été ajouté à l'employé qui en a le moins.");
         
         System.out.println("Envoi d'un mail au client");
+        System.out.println("");
         service.envoiMailClient(c1, new SimulationEnvoyeurMail());
-        System.out.println();*/
+        System.out.println();
         
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
         
-        /*System.out.println("##Création d'un horoscope");
+        System.out.println("##Création d'un horoscope");
         System.out.println("###Connection d'un employé");
         displayData(subToString(service.listerEmployes().toArray()));
         String login = Saisie.lireChaine(" - Login : ");
@@ -156,8 +158,16 @@ public class Main
         
         int pTrId = Saisie.lireInteger(" -  Numero de la prediction travail : ");
         Prediction pTr = service.trouverPredictionTravailAvecId(pTrId);
-        System.out.println();*/
+        System.out.println();
+        Horoscope horoscope = new Horoscope(new Date(2015,04,03));
+        horoscope= service.creerHoroscope(horoscope, client, medium, pAm, pSt, pTr);
+        System.out.println(horoscope);
         
+        System.out.println("Envoi de l'horoscope au client");
+        System.out.println("");
+        service.envoiHoroscopeClient(horoscope, new SimulationEnvoyeurMail());
+        
+        System.out.println("Fin de la simulation");
     }
     
     private static String[] subToString(Object[] objects) {

@@ -48,10 +48,6 @@ public class Horoscope implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    public List getPredictions() {
-        return predictions;
-    }
 
     public void setPredictions(List<Prediction> predictions) {
         this.predictions = predictions;
@@ -59,6 +55,18 @@ public class Horoscope implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<Prediction> getPredictions() {
+        return predictions;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Medium getMedium() {
+        return medium;
     }
 
     public void setMedium(Medium medium) {

@@ -8,14 +8,18 @@ package predictif.dao;
 import predictif.metier.modele.Horoscope;
 import predictif.metier.modele.Prediction;
 import java.util.List;
+import predictif.metier.modele.Amour;
 import predictif.metier.modele.Client;
+import predictif.metier.modele.Medium;
+import predictif.metier.modele.Sante;
+import predictif.metier.modele.Travail;
 /**
  *
  * @author quentin
  */
 public interface HoroscopeDao 
 {
-    public void creerHoroscope(Horoscope unHoroscope);
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium, Prediction predAmour, Prediction predSante, Prediction predTravail);
     public Horoscope trouverHoroscopeAvecId(long id);
     //public void supprimerHoroscope(Horoscope unHoroscope);
     public void ajouterPrediction(Prediction unePrediction);

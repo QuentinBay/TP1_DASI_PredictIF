@@ -13,9 +13,12 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.Vector;
 import javax.persistence.Query;
+import predictif.metier.modele.Amour;
 import predictif.metier.modele.Client;
 import predictif.metier.modele.Medium;
 import predictif.metier.modele.Prediction;
+import predictif.metier.modele.Sante;
+import predictif.metier.modele.Travail;
 /**
  *
  * @author quentin
@@ -23,13 +26,30 @@ import predictif.metier.modele.Prediction;
 public class HoroscopeDaoJpa implements HoroscopeDao {
 
     @Override
-    public void creerHoroscope(Horoscope unHoroscope) {
-        JpaUtil.log("debut transaction : creerHoroscope");
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client , Medium medium ,Prediction predAmour, Prediction predSante, Prediction predTravail) {
+        JpaUtil.log("HoroscopeDaoJpa : creerHoroscope");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
-            em.persist(unHoroscope);
+            em.persist(horoscope);
+            
+            //Ajoutons les predictions selectionnees a l horoscope
+            List<Prediction> predictions= new Vector<Prediction>();
+            predictions.add(predAmour);
+            predictions.add(predSante);
+            predictions.add(predTravail);
+            horoscope.setPredictions(predictions);
+            
+            //Associe un client a l horoscope
+            horoscope.setClient(client);
+            
+            //Associe un medium a la prediction
+            horoscope.setMedium(medium);
+            em.merge(horoscope);
+            return horoscope;
+            
         } catch (Exception ex) {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 
@@ -66,6 +86,9 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } }
+        } 
+    }
+
+
     
 }

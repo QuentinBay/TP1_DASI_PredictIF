@@ -5,6 +5,7 @@
  */
 package predictif.metier.service;
 
+import java.text.SimpleDateFormat;
 import predictif.dao.jpa.JpaUtil;
 
 import predictif.dao.ClientDao;
@@ -222,16 +223,16 @@ public class Service
                 Horoscope h9 = new Horoscope(new Date(2015,5,14));
                 Horoscope h10 = new Horoscope(new Date(2015,6,28));
 
-                monGEHoroscope.creerHoroscope(h1);
-                monGEHoroscope.creerHoroscope(h2);
-                monGEHoroscope.creerHoroscope(h3);
-                monGEHoroscope.creerHoroscope(h4);
-                monGEHoroscope.creerHoroscope(h5);
-                monGEHoroscope.creerHoroscope(h6);
-                monGEHoroscope.creerHoroscope(h7);
-                monGEHoroscope.creerHoroscope(h8);
-                monGEHoroscope.creerHoroscope(h9);
-                monGEHoroscope.creerHoroscope(h10);
+                monGEHoroscope.creerHoroscope(h1, c1, m1, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h2, c2, m2, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h3, c3, m4, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h4, c3, m5, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h5, c4, m6, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h6, c2, m7, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h7, c5, m8, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h8, c6, m9, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h9, c7, m10, p4,p2,p1);
+                monGEHoroscope.creerHoroscope(h10, c8, m11, p4,p2,p1);
                 
 
                 JpaUtil.validerTransaction();
@@ -604,5 +605,105 @@ public class Service
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } 
+    }
+    
+    public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium, Prediction predAmour, Prediction predSante, Prediction predTravail)
+    {
+        JpaUtil.log("Service : ajouterClient");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            HoroscopeDao monGE = new HoroscopeDaoJpa();
+            monGE.creerHoroscope(horoscope, client, medium, predAmour, predSante, predTravail);
+            
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return horoscope;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    /**
+     * Génère le contenu d'un email à partir d'un horoscope sans rien envoyer
+     * @param horoscope L'horoscope utilisé
+     * @return Le contenu de l'email
+     */
+    public String genererContenuMail(Horoscope horoscope) 
+    {
+        Client client = horoscope.getClient();
+        List<Prediction> predictions= horoscope.getPredictions();
+
+
+        String contenu = client.getPrenom() + " " + client.getNom() + "\n";
+        contenu += client.getAddPostale() + "\n";
+        contenu += client.getNumTelephone() + "\n";
+        contenu += "Votre numero client : " + client.getNumClient() + "\n";
+        contenu += "Votre signe astrologique : " + client.getSigne().getSigne() + "\n";
+
+        contenu += "Vos mediums favoris : ";
+        boolean premier = true;
+        for(Medium medium : client.getMediums()) {
+            if(premier) {
+                premier = false;
+            } else {
+                contenu += ", ";
+            }
+            contenu += medium.getPseudo();
+        }
+        contenu += "\n\n";
+
+        Date now = new Date();
+        contenu += "Le " + new SimpleDateFormat("dd/mm/yyyy").format(now);
+        contenu += "\n\n";
+
+        String particule = (client.getCivilite()=='m') ? "" : "e";
+        contenu += "Cher" + particule + " " + client.getPrenom() +  ", aujourd'hui votre voyance vous est offerte par " + horoscope.getMedium().getPseudo();
+        contenu += "\n\n";
+
+
+        for(Prediction p : predictions) 
+        {
+            contenu+="["+p.getNumero()+"] ";
+            contenu += p.getType()+" (";
+            for(int i = 0; i < p.getPositivite(); i++) {
+                contenu += p.getIcone();
+            }
+            contenu += ") : " + p.getPrevision();
+            
+            if(p.getType().equals("Sante"))
+            {
+                Sante s = (Sante)p;
+                contenu += "Notre conseil : " + s.getConseil();
+            }
+            else if(p.getType().equals("Amour"))
+            {
+                Amour a = (Amour)p;
+                contenu += "Votre signe partenaire : " + a.getPartenaire().getSigne();
+            }
+            contenu += "\n\n";
+
+        }
+        return contenu;
+    }
+    
+    /**
+     * Envoie un mail au client contenant son horoscope
+     * @param horoscope Le nouvel horoscope à envoyer
+     * @param envoyeur Le service envoyant l'email
+     */
+    public void envoiHoroscopeClient (Horoscope horoscope, EnvoyeurMail envoyeur){
+        envoyeur.envoi(
+                ADRESSE_EXPEDITEUR,
+                horoscope.getClient().getAddElectronique(),
+                "Votre horoscope",
+                genererContenuMail(horoscope)
+        );
     }
 }
