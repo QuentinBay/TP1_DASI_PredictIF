@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package predictif.metier.service;
 
@@ -12,9 +10,6 @@ import predictif.dao.ClientDao;
 import predictif.dao.jpa.ClientDaoJpa;
 import predictif.metier.modele.Client;
 
-import predictif.dao.EmployeDao;
-import predictif.dao.jpa.EmployeDaoJpa;
-import predictif.metier.modele.Employe;
 
 import predictif.dao.SigneAstrologiqueDao;
 import predictif.dao.jpa.SigneAstrologiqueDaoJpa;
@@ -37,7 +32,6 @@ import predictif.dao.jpa.HoroscopeDaoJpa;
 import predictif.metier.modele.Horoscope;
 
 import java.util.Date; // AA/MM/JJ
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -49,8 +43,9 @@ import predictif.metier.modele.Amour;
 import predictif.metier.modele.Sante;
 import predictif.metier.modele.Travail;
 /**
- *
- * @author qbayart
+ * Cette classe rassemble l'ensemble des services qui vont être appelés par les IHMs
+ * pour gérer les transactions avec le système d'informations
+ * @author Alexis Papin & Quentin Bayart
  */
 public class Service 
 {
@@ -58,8 +53,15 @@ public class Service
     private static String ADRESSE_EXPEDITEUR = "Jean-Charles@predictif.com";
     
 /*----------------------------------CONSTRUCTEURS---------------------------------*/
+    /**
+     * Constructeur par défaut de service
+     */
     public Service () { }
 /*-------------------------------------METHODES-----------------------------------*/
+    
+    /**
+     * Créé quelques objets métiers pour faire une simulation des services
+     */
     public void initialiser()
     // On cree pleins de clients, employes.. pour la demo
     {
@@ -260,7 +262,10 @@ public class Service
                             /  SERVICES POUR IHM CLIENT  /
                             *****************************/
     
-    
+    /**
+     * Créé un client
+     * @param unClient un client
+     */
     public void ajouterClient(Client unClient)
     {
         JpaUtil.log("Service : ajouterClient");
@@ -281,6 +286,10 @@ public class Service
         }
     }
         
+    /**
+     * Renvoie la liste de tous les médiums de Predictif
+     * @return la liste des médiums
+     */
     public List<Medium> listerMediums ()
     {
         JpaUtil.log("Service : listerMediums");
@@ -305,6 +314,11 @@ public class Service
         } 
     }
 
+    /**
+     * Met à jour la liste des médiums d'un client
+     * @param unClient un client
+     * @param mediums une liste de médiums
+     */
     public void choisirMediums(Client unClient, List<Medium> mediums)
     {
         JpaUtil.log("Service : choisirMediums");
@@ -325,6 +339,11 @@ public class Service
         }
     }
     
+    /**
+     * Renvoir un médium en fonction d'un identifiant
+     * @param unId un identifiant
+     * @return un médium
+     */
     public Medium trouverMediumAvecId(long unId)
     {
         JpaUtil.log("Service : trouverMediumAvecId");
@@ -350,6 +369,10 @@ public class Service
         } 
     }
     
+    /**
+     * Associe un nouveau client à un employé
+     * @param client un nouveau client
+     */
     public void affecterClientAEmploye(Client client)
     {
         JpaUtil.log("Service : affecterClientAEmploye");
@@ -374,6 +397,11 @@ public class Service
         } 
     }
     
+    /**
+     * Simule l'envoie d'un mail pour confirmer l'inscription d'un client
+     * @param client un nouveau client
+     * @param envoyeur employé fictif de Predictif qui envoie le mail
+     */
     public void envoiMailClient (Client client, EnvoyeurMail envoyeur)
     {
         String contenu = "Bonjour " + client.getPrenom() + " " + client.getNom() + " et bienvenue chez Predict'IF ! \n";
@@ -387,6 +415,12 @@ public class Service
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
     
+    /**
+     * Renvoie un employé en fonction d'un login et d'un mot de passe
+     * @param unPseudo un login
+     * @param unMDP un mot de passe
+     * @return un employé
+     */
     public Employe trouverEmployeAvecPseudoEtMDP(String unPseudo, String unMDP)
     {
         JpaUtil.log("Service : trouverEmployeAvecPseudoEtMDP");
@@ -412,6 +446,10 @@ public class Service
         } 
     }
     
+    /**
+     * Renvoie la liste de tous les employés de Predictif
+     * @return la liste de tous les employés
+     */
     public List<Employe> listerEmployes ()
     {
         JpaUtil.log("Service : listerEmployes");
@@ -436,6 +474,11 @@ public class Service
         } 
     }
     
+    /**
+     * Renvoie la liste des clients d'un employé
+     * @param employe un employé
+     * @return la liste des clients
+     */
     public List<Client> listerClients (Employe employe)
     {
         JpaUtil.log("Service : listerClients");
@@ -460,6 +503,11 @@ public class Service
         } 
     }
     
+    /**
+     * Renvoie un client en fonction d'un identifiant
+     * @param unId un identifiant
+     * @return un client
+     */
     public Client trouverClientAvecId(long unId)
     {
         JpaUtil.log("Service : trouverClientAvecId");
@@ -485,6 +533,11 @@ public class Service
         } 
     }
     
+    /**
+     * Affiche les médiums d'un client
+     * @param client un client
+     * @return la liste des médiums
+     */
     public List<Medium> listerMediumsClient (Client client)
     {
         JpaUtil.log("Service : listerMediumsClient");
@@ -509,6 +562,10 @@ public class Service
         } 
     }
     
+    /**
+     * Affiche toutes les prédictions existantes
+     * @return la liste des prédictions existantes
+     */
     public List<Prediction> listerPredictionsTriees ()
     {
         JpaUtil.log("Service : listerPredictionsTriees");
@@ -533,6 +590,11 @@ public class Service
         }
     }
     
+    /**
+     * Renvoie une prédiction de type amour en fonction d'un identifiant
+     * @param id un identifiant
+     * @return une prédiction
+     */
     public Prediction trouverPredictionAmourAvecId(long id)
     {
         JpaUtil.log("Service : trouverPredictionAmourAvecId");
@@ -558,6 +620,11 @@ public class Service
         } 
     }
     
+    /**
+     * Renvoie une prédiction de type santé en fonction d'un identifiant
+     * @param id un identifiant
+     * @return une prédiction
+     */
     public Prediction trouverPredictionSanteAvecId(long id)
     {
         JpaUtil.log("Service : trouverPredictionSanteAvecId");
@@ -583,6 +650,11 @@ public class Service
         } 
     }
     
+    /**
+     * Renvoie une prédiction de type travail en fonction d'un identifiant
+     * @param id un identifiant
+     * @return une prédiction
+     */
     public Prediction trouverPredictionTravailAvecId(long id)
     {
         JpaUtil.log("Service : trouverPredictionTravailAvecId");
@@ -608,6 +680,16 @@ public class Service
         } 
     }
     
+    /**
+     * Créé un horoscope à partir d'un horoscope, d'un client et d'un médium
+     * @param horoscope un horoscope
+     * @param client un client
+     * @param medium un médium
+     * @param predAmour une prédiction amour
+     * @param predSante une prédiction santé
+     * @param predTravail une prédiction travail
+     * @return l'horoscope créé
+     */
     public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium, Prediction predAmour, Prediction predSante, Prediction predTravail)
     {
         JpaUtil.log("Service : ajouterClient");
@@ -631,6 +713,13 @@ public class Service
         }
     }
     
+    /**
+     * Créé un horoscope à partir d'un horoscope, d'un client et d'un médium
+     * @param horoscope un horoscope
+     * @param client un client
+     * @param medium un médium
+     * @return l'horoscope créé
+     */
     public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium)
     {
         JpaUtil.log("Service : creerHoroscope");
@@ -732,6 +821,11 @@ public class Service
         );
     }
     
+    /**
+     * Affiche l'hitorique des horoscopes du client
+     * @param client le client
+     * @return l'historique
+     */
     public List<Horoscope> listerHistoriqueClient (Client client)
     {
         JpaUtil.log("Service : listerHistoriqueClient");
@@ -756,6 +850,12 @@ public class Service
         }
     }
     
+    /**
+     * Ajoute une prédiction à un horoscope en cours de fabrication
+     * @param h un horoscope en cours de fabrication
+     * @param p une prédiction à ajouter
+     * @return un horoscope en cours de fabrication
+     */
     public Horoscope ajouterPrediction(Horoscope h, Prediction p)
     {
         JpaUtil.log("Service : ajouterPrediction");
@@ -779,6 +879,12 @@ public class Service
         }
     }
     
+    /**
+     * Supprime une prédiction à un horoscope en cours de fabrication
+     * @param h un horoscope en cours de fabrication
+     * @param p une prédiction à supprimer
+     * @return un horoscope en cours de fabrication
+     */
     public Horoscope supprimerPrediction(Horoscope h, Prediction p)
     {
         JpaUtil.log("Service : ajouterPrediction");

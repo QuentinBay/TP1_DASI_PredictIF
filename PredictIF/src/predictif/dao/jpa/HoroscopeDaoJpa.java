@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import predictif.dao.HoroscopeDao;
@@ -20,11 +16,21 @@ import predictif.metier.modele.Prediction;
 import predictif.metier.modele.Sante;
 import predictif.metier.modele.Travail;
 /**
- *
- * @author quentin
+ * Classe Horoscope qui implémente les méthodes de la couche Dao
+ * @author Alexis Papin & Quentin Bayart
  */
 public class HoroscopeDaoJpa implements HoroscopeDao {
 
+    /**
+     * Créé un horoscope 
+     * @param horoscope un horoscope
+     * @param client un client
+     * @param medium un médium
+     * @param predAmour une prédiction d'amour
+     * @param predSante une prédiction de santé
+     * @param predTravail une prédiction de travail
+     * @return un horoscope
+     */
     @Override
     public Horoscope creerHoroscope(Horoscope horoscope, Client client , Medium medium ,Prediction predAmour, Prediction predSante, Prediction predTravail) {
         JpaUtil.log("HoroscopeDaoJpa : creerHoroscope");
@@ -53,6 +59,11 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         }
     }
 
+    /**
+     * Renvoie un horoscope en fonction d'un identifiant
+     * @param id un identifiant
+     * @return un horoscope
+     */
     @Override
     public Horoscope trouverHoroscopeAvecId(long id) {
         JpaUtil.log("HoroscopeDaoJpa : trouverHoroscopeAvecId");
@@ -67,7 +78,12 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         } 
     }
 
-
+    /**
+     * Ajoute une prédiction à une horoscope
+     * @param horoscope un horoscope
+     * @param unePrediction une prédiction
+     * @return un horoscope
+     */
     @Override
     public Horoscope ajouterPrediction(Horoscope horoscope, Prediction unePrediction) {
         JpaUtil.log("HoroscopeDaoJpa : ajouterPrediction");
@@ -85,6 +101,12 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         }
     }
     
+    /**
+     * Supprime une prédiction d'un horoscope
+     * @param horoscope un horoscope
+     * @param unePredictionune prédiction
+     * @return un horoscope
+     */
     @Override
     public Horoscope supprimerPrediction(Horoscope horoscope, Prediction unePrediction) {
         JpaUtil.log("HoroscopeDaoJpa : ajouterPrediction");
@@ -102,6 +124,11 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         }
     }
 
+    /**
+     * Renvoie l'historique des horoscopes d'un client
+     * @param client un client
+     * @return la liste des horoscopes
+     */
     @Override
     public List<Horoscope> trouverTousLesHoroscopes(Client client) {
         JpaUtil.log("HoroscopeDaoJpa : trouverTousLesHoroscopes");
@@ -118,6 +145,13 @@ public class HoroscopeDaoJpa implements HoroscopeDao {
         } 
     }
 
+    /**
+     * Créé un horoscope 
+     * @param horoscope un horoscope
+     * @param client un client
+     * @param medium un médium
+     * @return un horoscope
+     */
     @Override
     public Horoscope creerHoroscope(Horoscope horoscope, Client client, Medium medium) {
         JpaUtil.log("HoroscopeDaoJpa : creerHoroscope");
