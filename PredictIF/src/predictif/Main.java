@@ -39,6 +39,7 @@ public class Main
         //Date d = new Date(15,2,1);
         //System.out.println("Jour : "+d.getDay()+" Mois : "+d.getMonth()+" Année : "+d.getYear());
         Service service = new Service();
+        //displayData(subToString(service.listerMediums().toArray()));
         //Medium m = service.trouverMediumAvecId(23);
         //System.out.println(m);
         //service.initialiser();
@@ -85,7 +86,8 @@ public class Main
         service.ajouterClient(c1);
         
         System.out.println("### Choix des mediums favoris");
-        String meStr = Saisie.lireChaine("      Numero des mediums (separes par une virgule) : ");
+        displayData(subToString(service.listerMediums().toArray()));
+        String meStr = Saisie.lireChaine("Numero des mediums (separes par une virgule) : ");
         List<Medium> mediumsFavoris = new Vector<Medium>();
         MediumDao monGEMedium = new MediumDaoJpa();
         for(String mIdStr : meStr.split(",")) {
@@ -95,6 +97,26 @@ public class Main
         System.out.println();
 
         service.choisirMediums(c1, mediumsFavoris);
+        System.out.println("Mediums choisis : ");
+        displayData(subToString(c1.getMediums().toArray()));
+        
+    }
+    
+    private static String[] subToString(Object[] objects) {
+        String[] strings = new String[objects.length];
+        for (int i = 0; i < objects.length; i ++) {
+            strings[i] = objects[i].toString();
+        }
+        return strings;
+    }
+    
+    private static void displayData(String[] textes)
+    {
+        for (String texte : textes) {
+            System.out.print(" * ");
+            System.out.println(texte);
+        }
+        System.out.println("");
     }
     
 }

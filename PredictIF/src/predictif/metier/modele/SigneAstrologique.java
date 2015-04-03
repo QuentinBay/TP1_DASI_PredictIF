@@ -51,40 +51,40 @@ public class SigneAstrologique implements Serializable {
     {
         mois=unMois;
         switch(mois) {
-            case 0:
+            case 1:
                     signe = "Capricorne";
                     break;
-            case 1:
+            case 2:
                     signe = "Verseau";
                     break;
-            case 2:
+            case 3:
                     signe = "Poisson";
                     break;
-            case 3:
+            case 4:
                     signe = "Belier";
                     break;
-            case 4:
+            case 5:
                     signe = "Taureau";
                     break;
-            case 5:
+            case 6:
                     signe = "Gemeaux";
                     break;
-            case 6:
+            case 7:
                     signe = "Cancer";
                     break;
-            case 7:
+            case 8:
                     signe = "Lion";
                     break;
-            case 8:
+            case 9:
                     signe = "Vierge";
                     break;
-            case 9:
+            case 10:
                     signe = "Balance";
                     break;
-            case 10:
+            case 11:
                     signe = "Scorpion";
                     break;
-            case 11:
+            case 12:
                     signe = "Sagitaire";
                     break;
         }
@@ -118,6 +118,6 @@ public class SigneAstrologique implements Serializable {
 
     @Override
     public String toString() {
-        return "predictif.metier.modele.SigneAstrologique[ id=" + id + " ]";
+        return "Mois n°"+mois+" : "+signe;
     }
 }

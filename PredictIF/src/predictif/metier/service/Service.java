@@ -272,7 +272,7 @@ public class Service
         
     public List<Medium> listerMediums ()
     {
-        JpaUtil.log("Service : trouverEmployeAvecPseudoEtMDP");
+        JpaUtil.log("Service : listerMediums");
         try 
         {
             JpaUtil.init();

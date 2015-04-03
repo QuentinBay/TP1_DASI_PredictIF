@@ -34,7 +34,7 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
             EntityManager em = JpaUtil.obtenirEntityManager();
             
             SigneAstrologique signe;
-            for(int i=0; i<12; i++)
+            for(int i=1; i<=12; i++)
             {
                 signe=new SigneAstrologique(i);
                 em.persist(signe);
