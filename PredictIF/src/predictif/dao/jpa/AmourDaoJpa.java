@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import java.util.List;
@@ -16,12 +12,15 @@ import predictif.metier.modele.Prediction;
 import predictif.metier.modele.SigneAstrologique;
 
 /**
- *
- * @author quentin
+ * Classe Jpa de prédiction amoureuse qui implémente les métodes de la couche DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 public class AmourDaoJpa implements PredictionDao {
 
-
+    /**
+     * Créé une prédiction de type Amour
+     * @param unePrediction  une prédiction
+     */
     @Override
     public void creerPrediction(Prediction unePrediction) {
         JpaUtil.log("AmourDaoJpa : creerPredictionAmour");
@@ -48,6 +47,11 @@ public class AmourDaoJpa implements PredictionDao {
         return null;
     }
 
+    /**
+     * Renvoie une prédiction en fonction d'un identifiant
+     * @param id un identifiant
+     * @return une prédiction
+     */
     @Override
     public Prediction trouverPredictionAvecId(long id) {
         JpaUtil.log("ClientDaoJpa : trouverClientAvecId");

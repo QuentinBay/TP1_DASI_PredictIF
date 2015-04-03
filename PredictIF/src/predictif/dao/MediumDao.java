@@ -1,22 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao;
 
 import predictif.metier.modele.Medium;
 import java.util.List;
 /**
- *
- * @author qbayart
+ * Interface DAO de Medium
+ * @author Alexis Papin & Quentin Bayart
  */
 public interface MediumDao {
+    /**
+     * Créé un médium
+     * @param unMedium un médium
+     */
     public void creerMedium(Medium unMedium);
-    public Medium miseAJourMedium(Medium unMedium);
-    public void supprimerMedium(Medium unMedium);
-    public Medium trouverMediumAvecPseudo(String unPseudo);
+    
+    /**
+     * Renvoie un médium à partir d'un identifiant
+     * @param unID un identifiant
+     * @return un médium
+     */
     public Medium trouverMediumAvecID(long unID);
+    
+    /**
+     * Renvoie la liste de tous les médiums
+     * @return une liste de médiums
+     */
     public List<Medium> trouverTousMediums();
     
 }

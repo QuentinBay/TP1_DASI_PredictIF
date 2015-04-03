@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.metier.modele;
 
 import java.io.Serializable;
@@ -15,67 +11,127 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- *
- * @author qbayart
+ * Objet métier horoscope
+ * @author Alexis Papin & Quentin Bayart
  */
 @Entity
 public class Horoscope implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * Identifiant unique de l'horoscope
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    /**
+     * Date de création de l'horoscope
+     */
     @Temporal(TemporalType.DATE)
     private Date date;
     
+    /**
+     * Liste des prédictions de l'horoscope
+     */
     @ManyToMany
     private List<Prediction> predictions;
     
+    /**
+     * Client concerné par l'horoscope
+     */
     @ManyToOne
     private Client client;
     
+    /**
+     * Médium qui réalise l'horoscope
+     */
     @ManyToOne
     private Medium medium;
 
 /*--------------------------------------- GETTERS & SETTERS --------------------------------------*/
+    /**
+     * Renvoie l'id
+     * @return id
+     */
     public Long getId() {
         return id;
     }
     
+    /**
+     * Renvoie la date
+     * @return date
+     */
     public Date getDate() {
         return date;
     }
     
+    /**
+     * Change la valeur de la date
+     * @param date une date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Change la liste des prédictions
+     * @param predictions une liste de prédictions
+     */
     public void setPredictions(List<Prediction> predictions) {
         this.predictions = predictions;
     }
 
+    /**
+     * Change le client
+     * @param client un client
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     * Renvoie les prédictions
+     * @return les prédictions
+     */
     public List<Prediction> getPredictions() {
         return predictions;
     }
 
+    /**
+     * Renvoie les clients
+     * @return les clients
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * Renvoie un médium
+     * @return un médium
+     */
     public Medium getMedium() {
         return medium;
     }
 
+    /**
+     * Change le médium
+     * @param medium un médium
+     */
     public void setMedium(Medium medium) {
         this.medium = medium;
     }
     
 /* ------------------------------------------- CONSTRUCTEURS ------------------------------------- */
+    /**
+     * Constructeur par défaut
+     */
     public Horoscope () {}
     
+    /**
+     * Créer un horoscope à partir d'une date
+     * @param date une date
+     */
     public Horoscope ( Date date )
     {
         this.date=date;
@@ -85,11 +141,19 @@ public class Horoscope implements Serializable {
     }
     
 /* ----------------------------------------- METHODES ------------------------------------------ */
+   /**
+    * Ajoute un prédiction
+    * @param unePrediction une prédiction
+    */
     public void ajouterPrediction(Prediction unePrediction)
     {
         predictions.add(unePrediction);
     }
     
+    /**
+     * Supprime une prédiction
+     * @param unePrediction une prédiction
+     */
     public void supprimerPrediction(Prediction unePrediction)
     {
         predictions.remove(unePrediction);
@@ -115,6 +179,10 @@ public class Horoscope implements Serializable {
         return true;
     }
 
+    /**
+     * Définit l'affichage de l'horoscope
+     * @return forme de l'affichage
+     */
     @Override
     public String toString() {
         String contenu="Horoscope n°"+id+" datant du "+date+ " : \n";

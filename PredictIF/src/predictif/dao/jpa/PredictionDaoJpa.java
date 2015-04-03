@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import predictif.dao.PredictionDao;
@@ -16,15 +12,18 @@ import javax.persistence.Query;
 import predictif.metier.modele.Employe;
 
 /**
- *
- * @author quentin
+ * Classe Jpa de prédiction qui implémente les métodes de la couche DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 public class PredictionDaoJpa implements PredictionDao
 {
-
+    /**
+     * Créé une prédiction
+     * @param unePrediction  une prédiction
+     */
     @Override
     public void creerPrediction(Prediction unePrediction) {
-        JpaUtil.log("debut transaction : Creer Prediction");
+        JpaUtil.log("PredictionDaoJpa : creerPrediction");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unePrediction);
@@ -34,6 +33,10 @@ public class PredictionDaoJpa implements PredictionDao
         }
     }
 
+    /**
+     * Renvoie la liste des prédictions triées par type
+     * @return une liste de prédictions
+     */
     @Override
     public List<Prediction> trierPredictionAvecType() {
         JpaUtil.log("PredictionDaoJpa : trierPredictionAvecType");
@@ -54,7 +57,7 @@ public class PredictionDaoJpa implements PredictionDao
 
     @Override
     public Prediction trouverPredictionAvecId(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     
 }

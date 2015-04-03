@@ -1,9 +1,4 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package predictif.metier.modele;
 
 import java.io.Serializable;
@@ -13,40 +8,80 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
- * @author qbayart
+ * Classe de l'objet métier signe astrologique
+ * @author Alexis Papin & Quentin Bayart
  */
 @Entity
 public class SigneAstrologique implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * Identifiant unique
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    /**
+     * Nom du signe astrologique
+     */
     private String signe;
+    
+    /**
+     * Mois
+     */
     private int mois;
 
 /*-------------------------------GETTERS & SETTERS--------------------------------*/
+    /**
+     * 
+     * @return 
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getSigne() {
         return signe;
     }
+    
+    /**
+     * 
+     * @param signe 
+     */
     public void setSigne(String signe) {
         this.signe = signe;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getMois() {
         return mois;
     }
+    
+    /**
+     * 
+     * @param mois 
+     */
     public void setMois(int mois) {
         this.mois = mois;
     }
     
 /*---------------------------------CONSTRUCTEURS----------------------------------*/
+   /**
+    * Constructeur par défaut
+    */
     public SigneAstrologique () {}
     
+    /**
+     * Créé un signe astrologique
+     * @param unMois un mois
+     */
     public SigneAstrologique (int unMois)
     {
         mois=unMois;
@@ -116,6 +151,10 @@ public class SigneAstrologique implements Serializable {
         return true;
     }
 
+    /**
+     * Gère l'affichage d'un signe astrologique
+     * @return un affichage
+     */
     @Override
     public String toString() {
         return "Mois n°"+mois+" : "+signe;

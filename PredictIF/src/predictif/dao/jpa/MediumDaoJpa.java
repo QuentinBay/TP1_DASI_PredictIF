@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import predictif.dao.MediumDao;
@@ -15,16 +11,23 @@ import java.util.Vector;
 import predictif.metier.modele.Client;
 
 /**
- *
- * @author quentin
+ * Classe jpa de médium qui implémente les méthodes de la couche DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 
 public class MediumDaoJpa implements MediumDao
 {
 /* --------------------------------------- CONSTRUCTEURS --------------------------------------- */
+    /**
+     * Constructeur par défaut
+     */
     public MediumDaoJpa () {}
     
 /* ----------------------------------------- METHODES ------------------------------------------ */
+    /**
+     * Créé un médium
+     * @param unMedium un médium
+     */
     @Override
     public void creerMedium(Medium unMedium) {
         JpaUtil.log("MediumDaoJpa : creerMedium");
@@ -36,20 +39,11 @@ public class MediumDaoJpa implements MediumDao
         }
     }
 
-    @Override
-    public Medium miseAJourMedium(Medium unMedium) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void supprimerMedium(Medium unMedium) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Medium trouverMediumAvecPseudo(String unPseudo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    /**
+     * Renvoie un médium à partir d'un identifiant
+     * @param unID un identifiant
+     * @return un médium
+     */
     @Override
     public Medium trouverMediumAvecID(long unID){
         JpaUtil.log("MediumDaoJpa : trouverMediumAvecID");
@@ -64,20 +58,27 @@ public class MediumDaoJpa implements MediumDao
         }
     }
 
+    /**
+     * Renvoie la liste de tous les médiums
+     * @return une liste de médiums
+     */
     @Override
     public List<Medium> trouverTousMediums() {
-        Query query= JpaUtil.obtenirEntityManager().createQuery(
+        JpaUtil.log("MediumDaoJpa : trouverTousMediums");
+        try {
+            Query query= JpaUtil.obtenirEntityManager().createQuery(
                 "select c from Medium c");
-        
-        //query.setParameter("empMotDePasse", unMdp);
-        List<Medium> result = (List<Medium>)query.getResultList();
-        if (!result.isEmpty())
-        {
-            return result;
+
+            List<Medium> result = (List<Medium>)query.getResultList();
+            if (!result.isEmpty())
+            {
+                return result;
+            } 
+            return null;
         }
-        else
+        catch (Exception ex) 
         {
-            /*ATTENTION : Si on ne trouve pas l employe*/
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

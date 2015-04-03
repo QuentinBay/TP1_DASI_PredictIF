@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import predictif.dao.SigneAstrologiqueDao;
@@ -14,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author quentin
+ * Classe Jpa de SigneAstrologique qui implémente les métodes de la couche DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao 
 {
@@ -25,6 +21,9 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
     
     
 /*-------------------------------------METHODES-----------------------------------*/
+    /**
+     * Créé les 12 signes asstrologiques
+     */
     @Override
     public void creerTousLesSignesAstrologiques() 
     //On cree tous les signes astrologiques car ceux sont 12 entites predefinies
@@ -47,6 +46,11 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
         }
     }
 
+    /**
+     * Renvoie un signe astrologique en fonction d'un mois
+     * @param mois un mois
+     * @return un signe astrologique
+     */
     @Override
     public SigneAstrologique trouverSigneAstrologiqueAvecMois(int mois) 
     {
@@ -61,11 +65,7 @@ public class SigneAstrologiqueDaoJpa implements SigneAstrologiqueDao
             {
                 return (result.get(0));
             }
-            else
-            {
-                /*ATTENTION : Si on ne trouve pas l employe*/
-                return null;
-            }
+            return null;
         } 
         catch (Exception ex) 
         {

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import predictif.dao.ClientDao;
@@ -17,17 +13,23 @@ import predictif.metier.modele.Employe;
 import predictif.metier.modele.Medium;
 
 /**
- *
- * @author qbayart
+ * Classe jpa de client implémentant les méthodes de l'interface DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 public class ClientDaoJpa implements ClientDao {
 
     /* --------------------- CONSTRUCTEURS ---------------------------------- */
-    
+    /**
+     * Constructeur par défaut
+     */
     public ClientDaoJpa() {}
     
     /* ------------------------ METHODES ------------------------------------ */
 
+    /**
+     * Créé un client
+     * @param unClient un client
+     */
     @Override
     public void creerClient(Client unClient) {
         JpaUtil.log("ClientDaoJpa : creerClient");
@@ -46,6 +48,11 @@ public class ClientDaoJpa implements ClientDao {
         }
     }
 
+    /**
+     * Met à jour la liste des médiums d'un client
+     * @param unClient un client
+     * @param mediums des médiums
+     */
     @Override
     public void choisirMediums(Client unClient, List<Medium> mediums) {
         JpaUtil.log("ClientDaoJpa : choisirMediums");
@@ -59,19 +66,6 @@ public class ClientDaoJpa implements ClientDao {
         } catch (Exception ex) {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public void supprimerClient(Client unClient) {
-        JpaUtil.log("ClientDaoJpa : supprimerClient");
-        try {
-            EntityManager em = JpaUtil.obtenirEntityManager();
-
-            em.remove(unClient);
-            
-        } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }  
     }
     
     /**
@@ -103,8 +97,9 @@ public class ClientDaoJpa implements ClientDao {
     }
     
     /**
-     * @param idClient Id du client
-     * @return Le client
+     * Renvoie un client à partir de son identifiant
+     * @param idClient un identifiant
+     * @return un client
      */
     @Override
     public Client trouverClientAvecId(long idClient) {
@@ -121,10 +116,9 @@ public class ClientDaoJpa implements ClientDao {
     }
     
     /**
-     * Retourne la liste des clients classes pour un employe de sorte que le premier soit le client ayant le moins
-     * d'horoscopes
-     * @param employe L'employe
-     * @return Les clients dans le bon ordre
+     * Renvoie la liste des clients d'un employé
+     * @param employe un employé
+     * @return une liste de clients
      */
     public List<Client> classesPourChoixEmploye(Employe employe) {
         JpaUtil.log("ClientDaoJpa : classesPourEmploye");
@@ -141,6 +135,11 @@ public class ClientDaoJpa implements ClientDao {
         }
     }
     
+    /**
+     * Renvoie la liste des médiums favoris d'un client
+     * @param client un client
+     * @return une liste
+     */
     @Override
     public List<Medium> listerMediumsFavoris(Client client)
     {

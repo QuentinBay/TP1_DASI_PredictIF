@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao.jpa;
 
 import java.util.List;
@@ -15,18 +11,24 @@ import javax.persistence.Query;
 import predictif.metier.modele.Client;
 
 /**
- *
- * @author quentin
+ * Classe jpa d'employé implémentant les méthodes de la couche DAO
+ * @author Alexis Papin & Quentin Bayart
  */
 
 public class EmployeDaoJpa implements EmployeDao 
 {
 /*----------------------------------CONSTRUCTEURS---------------------------------*/
-    
+    /**
+     * Constructeur par défaut
+     */
     public EmployeDaoJpa () {}
     
     
 /*-----------------------------------METHODES-------------------------------------*/
+    /**
+     * Créé un émployé
+     * @param unEmploye un employé
+     */
     @Override
     public void creerEmploye(Employe unEmploye) {
         JpaUtil.log("EmployeDaoJpa : creerEmploye");
@@ -38,7 +40,12 @@ public class EmployeDaoJpa implements EmployeDao
         }
     }
 
-
+    /**
+     * Renvoie un employé à partir d'un pseudo et d'un mot de passe
+     * @param unPseudo un pseudo
+     * @param unMdp un mot de passe
+     * @return un employé
+     */
     @Override
     public Employe trouverEmployeAvecPseudoEtMdp(String unPseudo, String unMdp) 
     {
@@ -80,6 +87,11 @@ public class EmployeDaoJpa implements EmployeDao
         }
     }
     
+    /**
+     * Ajoute un client à un employé
+     * @param emp un employé
+     * @param unClient un client
+     */
     @Override
     public void ajouterClient (Employe emp,Client unClient)
     {
@@ -96,6 +108,10 @@ public class EmployeDaoJpa implements EmployeDao
         }
     }
     
+    /**
+     * Renvoie une liste de tous les employés de Predictif
+     * @return une liste d'employés
+     */
     @Override
     public List<Employe> listerEmployes ()
     {

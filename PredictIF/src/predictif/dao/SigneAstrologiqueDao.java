@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif.dao;
 
 import predictif.metier.modele.SigneAstrologique;
@@ -11,16 +7,23 @@ import java.util.Date;
 
 
 /**
- *
- * @author qbayart
+ * Interface DAO de SigneAstrologique
+ * @author Alexis Papin & Quentin Bayart
  */
 
 
 public interface SigneAstrologiqueDao 
 {
+    /**
+     * Créé les 12 signes asstrologiques
+     */
     public void creerTousLesSignesAstrologiques ();
-    //public SigneAstrologique miseAJourSigneAstrologique (SigneAstrologique unSigneAstrologique);
-    //public void supprimerSigneAstrologique (SigneAstrologique unSigneAstrologique);
+    
+    /**
+     * Renvoie un signe astrologique en fonction d'un mois
+     * @param mois un mois
+     * @return un signe astrologique
+     */
     public SigneAstrologique trouverSigneAstrologiqueAvecMois (int mois);
 }
 
