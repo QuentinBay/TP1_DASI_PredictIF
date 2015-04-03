@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package predictif;
 
 import java.text.ParseException;
@@ -35,53 +31,21 @@ import predictif.metier.modele.Sante;
 import predictif.metier.modele.Travail;
 import predictif.util.SimulationEnvoyeurMail;
 /**
- *
- * @author qbayart
+ * Classe principale
+ * @author Alexis Papin & Quentin Bayart
  */
 public class Main 
 {
     public static void main (String[] args)
     {
         Service service = new Service();
-        Client c = service.trouverClientAvecId(201);
-        displayData(subToString(service.listerHistoriqueClient(c).toArray()));
-        //service.initialiser();
-        //Prediction pAm = service.trouverPredictionAmourAvecId(43);
-        //System.out.println(pAm.getPrevision());
-       /* Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
-                                "123 rue", "060555555", "Quentin@hotmail.fr");
-        service.ajouterClient(c1);
-        service.affecterClientAEmploye(c1);
-        //System.out.println();
-        service.envoiMailClient(c1, new SimulationEnvoyeurMail());
         
-        Employe e = service.trouverEmployeAvecPseudoEtMDP("Bubu", "mdp");
-        //ATTENTION : Si on ne trouve pas l employe
-        if (e!=null)
-        {
-            System.out.println(e.getPrenom()+" "+e.getNom());
-        }
-        else
-        {
-            System.out.println("Employe not found !");
-        }
-        List<Medium> mediums = (List<Medium>)service.listerMediums();
-        System.out.println("Nb de mediums : "+mediums.size());
-        Iterator it = mediums.iterator();
-        
-        while(it.hasNext())
-        {
-            
-            System.out.println(it.next().toString());
-        }
-        
-        System.out.println("# Session interactive");*/
         
                             /****************************
                             /  SERVICES POUR IHM CLIENT  /
                             *****************************/        
         
-        /*System.out.println("## Inscription client");
+        System.out.println("## Inscription client");
         System.out.println("### Informations de base");
         String civilite = Saisie.lireChaine(" - Civilite : ");
         String nom = Saisie.lireChaine(" - Nom : ");
@@ -124,7 +88,7 @@ public class Main
         System.out.println("Envoi d'un mail au client");
         System.out.println("");
         service.envoiMailClient(c1, new SimulationEnvoyeurMail());
-        System.out.println();*/
+        System.out.println();
         
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
