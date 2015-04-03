@@ -20,11 +20,12 @@ import javax.persistence.*;
 @Entity
 //Precision du type d heritage : Toutes les predictions dans une seule table
 @Inheritance (strategy = InheritanceType.SINGLE_TABLE) 
-public class Prediction implements Serializable {
+public abstract class Prediction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    String type=null;
     private int numero;
     private int positivite;
     private String prevision; //Texte de la prediction
@@ -67,6 +68,14 @@ public class Prediction implements Serializable {
     public void setIcone(String icone) {
         this.icone = icone;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     
     
 /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
@@ -104,6 +113,6 @@ public class Prediction implements Serializable {
 
     @Override
     public String toString() {
-        return "predictif.metier.modele.Prediction[ id=" + id + " ]";
+        return "Prediction "+type+" n°"+id+" (" + positivite + icone + ") : " + prevision.substring(0, 15) + "...";
     }
 }

@@ -211,9 +211,4 @@ public class Client implements Serializable {
         unHoroscope.setClient(this);
     }
     
-    public void removeHoroscope (Horoscope unHoroscope)
-    {
-        this.horoscopes.remove(unHoroscope);
-        unHoroscope.setClient(null);
-    }
 }

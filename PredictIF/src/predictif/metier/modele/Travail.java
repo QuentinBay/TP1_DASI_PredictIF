@@ -15,7 +15,7 @@ import javax.persistence.Entity;
  * @author qbayart
  */
 @Entity
-public class Travail extends Prediction implements Serializable 
+public class Travail extends Prediction
 {
     
 
@@ -26,8 +26,16 @@ public class Travail extends Prediction implements Serializable
     /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
     public Travail () {}
     
+    /**
+     * Cree une prediction de travail
+     * @param numero Son texte
+     * @param positivite Sa positivite
+     * @param prevision Sa description
+     * @param icone Son icone
+     */
     public Travail (int numero, int positivite, String prevision, String icone)
     {
         super( numero, positivite, prevision, icone);
+        type="Travail";
     }
 }

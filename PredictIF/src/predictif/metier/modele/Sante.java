@@ -14,11 +14,19 @@ import javax.persistence.Entity;
  * @author qbayart
  */
 @Entity
-public class Sante extends Prediction implements Serializable
+public class Sante extends Prediction
 {
     private String conseil;
 
     /*------------------------------------ Getters et Setters ---------------------------*/
+
+    public String getConseil() {
+        return conseil;
+    }
+
+    public void setConseil(String conseil) {
+        this.conseil = conseil;
+    }
    
 
     
@@ -29,5 +37,13 @@ public class Sante extends Prediction implements Serializable
     {
         super( numero, positivite, prevision, icone);
         conseil=unConseil;
+        type="Sante";
+    }
+    
+    /**
+     * @return Une représentation textuelle de la prédiction
+     */
+    public String toString() {
+        return super.toString() + " **" + conseil + "**";
     }
 }

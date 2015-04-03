@@ -15,22 +15,39 @@ import javax.persistence.*;
  * @author qbayart
  */
 @Entity
-public class Amour extends Prediction implements Serializable 
+public class Amour extends Prediction
 {
     
     @ManyToOne
     private SigneAstrologique partenaire;
 
     /*------------------------------------ Getters et Setters ---------------------------*/
+
+    public SigneAstrologique getPartenaire() {
+        return partenaire;
+    }
+
+    public void setPartenaire(SigneAstrologique partenaire) {
+        this.partenaire = partenaire;
+    }
    
 
     
     /* --------------------------------------- CONSTRUCTEURS ---------------------------------- */
     public Amour () {}
     
-    public Amour (int numero, int positivite, String prevision, String icone, SigneAstrologique signe)
+    public Amour (int numero, int positivite, String prevision, String icone)
     {
         super( numero, positivite, prevision, icone);
-        partenaire=signe;
+        partenaire=null;
+        type="Amour";
     }
+
+    /**
+     * @return Une représentation textuelle de la prédiction
+     */
+    public String toString() {
+        return super.toString() + " **" + partenaire.getSigne() + "**";
+    }
+    
 }

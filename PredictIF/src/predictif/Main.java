@@ -39,7 +39,7 @@ public class Main
     {
         Service service = new Service();
         //service.initialiser();
-        
+        displayData(subToString(service.listerPredictionsTriees().toArray()));
        /* Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
         service.ajouterClient(c1);
@@ -121,7 +121,7 @@ public class Main
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
         
-        System.out.println("##Création d'un horoscope");
+        /*System.out.println("##Création d'un horoscope");
         System.out.println("###Connection d'un employé");
         displayData(subToString(service.listerEmployes().toArray()));
         String login = Saisie.lireChaine(" - Login : ");
@@ -140,6 +140,9 @@ public class Main
         int mediumId = Saisie.lireInteger(" - Numero du medium : ");
         Medium medium = service.trouverMediumAvecId(mediumId);
         System.out.println();
+        
+        System.out.println("Choix Prediction Travail");
+        displayData(subToString(service..toArray()));*/
         
     }
     

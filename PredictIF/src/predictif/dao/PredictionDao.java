@@ -14,8 +14,6 @@ import java.util.List;
 public interface PredictionDao 
 {
     public void creerPrediction(Prediction unePrediction);
-    public Prediction miseAJourPrediction(Prediction unePrediction);
-    public void supprimerPrediction(Prediction unePrediction);
     public List<Prediction> trierPredictionAvecType();
     public List<Prediction> trouverToutesPredictions();
 }

@@ -71,39 +71,13 @@ public class Horoscope implements Serializable {
     public Horoscope ( Date date )
     {
         this.date=date;
-        predictions=new Vector();
+        predictions=new Vector<Prediction>();
         client=null;
         medium=null;
     }
     
 /* ----------------------------------------- METHODES ------------------------------------------ */
     
-    public void ajouterPrediction (Prediction unePrediction)
-    {
-        predictions.add(unePrediction);
-    }
-    
-    public void supprimerPrediction( Prediction unePrediciton)
-    {
-        /*Iterator it = predictions.iterator();
-
-        while(it.hasNext())
-        {
-            if(it.numero == unePrediction)
-            {
-                it.remove();
-                break;
-            }
-        }*/
-        predictions.remove(unePrediciton);
-    }
-    
-    public void supprimerToutesPredictions()
-    {
-        predictions.clear();
-    }
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -126,6 +100,6 @@ public class Horoscope implements Serializable {
 
     @Override
     public String toString() {
-        return "predictif.metier.modele.Horoscope[ id=" + id + " ]";
+        return "Horoscope n°"+id+" datant du "+date;
     }
 }

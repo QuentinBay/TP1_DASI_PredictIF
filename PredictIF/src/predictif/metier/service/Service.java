@@ -40,6 +40,12 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import predictif.dao.jpa.AmourDaoJpa;
+import predictif.dao.jpa.SanteDaoJpa;
+import predictif.dao.jpa.TravailDaoJpa;
+import predictif.metier.modele.Amour;
+import predictif.metier.modele.Sante;
+import predictif.metier.modele.Travail;
 /**
  *
  * @author qbayart
@@ -128,44 +134,46 @@ public class Service
                 
                 
 /*------------------------------CREATION PREDICTIONS------------------------------*/
-                PredictionDao monGEPrediction = new PredictionDaoJpa();
-                Prediction p1 = new Prediction(1, 4, "Vous vous portez très bien aujourd'hui", 
+                PredictionDao monGEPTravail = new TravailDaoJpa();
+                PredictionDao monGEPAmour = new AmourDaoJpa();
+                PredictionDao monGEPSante = new SanteDaoJpa();
+                Prediction p1 = new Travail(1, 4, "Vous vous portez très bien aujourd'hui", 
                                                 "image");
-                Prediction p2 = new Prediction(1, 1, "Ca ne va pas fort aujourd'hui", 
-					"pluie");
-                Prediction p3 = new Prediction(2, 2, "Une journée plutot commune", 
+                Prediction p2 = new Sante(1, 1, "Ca ne va pas fort aujourd'hui", 
+					"pluie", "Restez chez vous");
+                Prediction p3 = new Travail(2, 2, "Une journée plutot commune", 
                         "ordinateur");
-                Prediction p4 = new Prediction(3, 4, "Une très bonne rencontre aujourd'hui", 
+                Prediction p4 = new Amour(3, 4, "Une très bonne rencontre aujourd'hui", 
                         "coeur4");
-                Prediction p5 = new Prediction(2, 3, "Votre travail sera reconnu", 
+                Prediction p5 = new Travail(2, 3, "Votre travail sera reconnu", 
                         "ordinateur");
-                Prediction p6 = new Prediction(1, 4, "Vous vous sentez libre comme l'air", 
-                        "soleil");
-                Prediction p7 = new Prediction(3, 1, "Ca ne sent pas bon pour votre couple", 
+                Prediction p6 = new Sante (1, 4, "Vous vous sentez libre comme l'air", 
+                        "soleil", "Volez !");
+                Prediction p7 = new Amour (3, 1, "Ca ne sent pas bon pour votre couple", 
                         "coeur1");
-                Prediction p8 = new Prediction(3, 2, "Une routine morose se fait sentir", 
-                        "coeur2");
-                Prediction p9 = new Prediction(1, 1, "Votre tête vous fait mal", 
-                        "pluie");
-                Prediction p10 = new Prediction(2, 4, "Une promotion vous attend", 
+                Prediction p8 = new Sante (3, 2, "Une routine morose se fait sentir", 
+                        "coeur2", "Changez d'air");
+                Prediction p9 = new Sante (1, 1, "Votre tête vous fait mal", 
+                        "pluie", "Prenez un doliprane");
+                Prediction p10 = new Travail (2, 4, "Une promotion vous attend", 
                         "ordinateur");
-                Prediction p11 = new Prediction(1, 2, "Vous êtes un peu dans le brouillard", 
-                        "nuageux");
-                Prediction p12 = new Prediction(3, 3, "Tout va pour le mieux, profitez-en", 
-                        "coeur3");
+                Prediction p11 = new Sante (1, 2, "Vous êtes un peu dans le brouillard", 
+                        "nuageux", "Prenez un café");
+                Prediction p12 = new Sante (3, 3, "Tout va pour le mieux, profitez-en", 
+                        "coeur3", "Faites du sport");
 												
-                monGEPrediction.creerPrediction(p1);
-                monGEPrediction.creerPrediction(p2);
-                monGEPrediction.creerPrediction(p3);
-                monGEPrediction.creerPrediction(p4);
-                monGEPrediction.creerPrediction(p5);
-                monGEPrediction.creerPrediction(p6);
-                monGEPrediction.creerPrediction(p7);
-                monGEPrediction.creerPrediction(p8);
-                monGEPrediction.creerPrediction(p9);
-                monGEPrediction.creerPrediction(p10);
-                monGEPrediction.creerPrediction(p11);
-                monGEPrediction.creerPrediction(p12);
+                monGEPTravail.creerPrediction(p1);
+                monGEPSante.creerPrediction(p2);
+                monGEPTravail.creerPrediction(p3);
+                monGEPAmour.creerPrediction(p4);
+                monGEPTravail.creerPrediction(p5);
+                monGEPSante.creerPrediction(p6);
+                monGEPAmour.creerPrediction(p7);
+                monGEPSante.creerPrediction(p8);
+                monGEPSante.creerPrediction(p9);
+                monGEPTravail.creerPrediction(p10);
+                monGEPSante.creerPrediction(p11);
+                monGEPSante.creerPrediction(p12);
                 
 /*--------------------------------CREATION CLIENTS--------------------------------*/
                 ClientDao monGEClient = new ClientDaoJpa();
@@ -499,4 +507,27 @@ public class Service
         } 
     }
     
+    public List<Prediction> listerPredictionsTriees ()
+    {
+        JpaUtil.log("Service : listerPredictionsTriees");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            PredictionDao monGE = new PredictionDaoJpa();
+            List<Prediction>  mediums = (List<Prediction>)monGE.trierPredictionAvecType();
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return mediums;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

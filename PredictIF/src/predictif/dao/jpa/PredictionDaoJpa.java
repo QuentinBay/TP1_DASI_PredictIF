@@ -12,12 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.Vector;
+import javax.persistence.Query;
+import predictif.metier.modele.Employe;
 
 /**
  *
  * @author quentin
  */
-public class PredictionDaoJpa implements PredictionDao 
+public class PredictionDaoJpa implements PredictionDao
 {
 
     @Override
@@ -26,24 +28,28 @@ public class PredictionDaoJpa implements PredictionDao
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unePrediction);
+            
         } catch (Exception ex) {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public Prediction miseAJourPrediction(Prediction unePrediction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void supprimerPrediction(Prediction unePrediction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Prediction> trierPredictionAvecType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JpaUtil.log("PredictionDaoJpa : trierPredictionAvecType");
+        try {
+            Query query= JpaUtil.obtenirEntityManager().createQuery("select p from Prediction p order by p.type");
+
+            List<Prediction> result = (List<Prediction>)query.getResultList();
+            if (!result.isEmpty())
+            {
+                return result;
+            }
+            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override

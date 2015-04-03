@@ -14,8 +14,6 @@ import predictif.metier.modele.Client;
  */
 public interface EmployeDao {
     public void creerEmploye(Employe unEmploye);
-    public Employe miseAJourEmploye(Employe unEmploye);
-    public void supprimerEmploye(Employe unEmploye);
     public Employe trouverEmployeAvecPseudoEtMdp(String unPseudo, String unMdp);
     public Employe moinsDeClients();
     public void ajouterClient (Employe emp,Client unClient);
