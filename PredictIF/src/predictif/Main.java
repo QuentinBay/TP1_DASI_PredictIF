@@ -73,7 +73,7 @@ public class Main
                             /  SERVICES POUR IHM CLIENT  /
                             *****************************/        
         
-        System.out.println("## Inscription client");
+        /*System.out.println("## Inscription client");
         System.out.println("### Informations de base");
         String civilite = Saisie.lireChaine(" - Civilite : ");
         String nom = Saisie.lireChaine(" - Nom : ");
@@ -115,12 +115,22 @@ public class Main
         
         System.out.println("Envoi d'un mail au client");
         service.envoiMailClient(c1, new SimulationEnvoyeurMail());
-        System.out.println();
+        System.out.println();*/
         
                            /******************************
                            /  SERVICES POUR IHM EMPLOYE   /
                            *******************************/
         
+        System.out.println("##Création d'un horoscope");
+        System.out.println("###Connection d'un employé");
+        displayData(subToString(service.listerEmployes().toArray()));
+        String login = Saisie.lireChaine(" - Login : ");
+        String mdp = Saisie.lireChaine(" - Mot de passe : ");
+        Employe e = service.trouverEmployeAvecPseudoEtMDP(login, mdp);
+        System.out.println(e);
+        
+        System.out.println("###Choix d'un client");
+        displayData(subToString(service.listerClients(e).toArray()));
     }
     
     private static String[] subToString(Object[] objects) {

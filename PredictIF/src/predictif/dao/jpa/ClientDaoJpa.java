@@ -130,8 +130,8 @@ public class ClientDaoJpa implements ClientDao {
         JpaUtil.log("ClientDaoJpa : classesPourEmploye");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
-            Query q = em.createQuery("select c from Client c where c.employeReferent = :emp order by size(c.horoscopes)");
-            q.setParameter("emp", employe);
+            Query q = em.createQuery("select e.clients from Employe e where e.id = :empId");
+            q.setParameter("empId", employe.getId());
             return (List<Client>) q.getResultList();
         } 
         catch (Exception ex) 

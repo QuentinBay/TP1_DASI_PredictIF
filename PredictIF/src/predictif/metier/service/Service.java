@@ -401,4 +401,51 @@ public class Service
         } 
     }
     
+    public List<Employe> listerEmployes ()
+    {
+        JpaUtil.log("Service : listerEmployes");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            EmployeDao monGE = new EmployeDaoJpa();
+            List<Employe>  employes = (List<Employe>)monGE.listerEmployes();
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return employes;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
+    public List<Client> listerClients (Employe employe)
+    {
+        JpaUtil.log("Service : listerClients");
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            ClientDao monGE = new ClientDaoJpa();
+            List<Client>  clients = (List<Client>)monGE.classesPourChoixEmploye(employe);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return clients;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
 }

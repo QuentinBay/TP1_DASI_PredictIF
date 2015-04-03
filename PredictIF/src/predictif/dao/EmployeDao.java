@@ -5,6 +5,7 @@
  */
 package predictif.dao;
 
+import java.util.List;
 import predictif.metier.modele.Employe;
 import predictif.metier.modele.Client;
 /**
@@ -18,5 +19,5 @@ public interface EmployeDao {
     public Employe trouverEmployeAvecPseudoEtMdp(String unPseudo, String unMdp);
     public Employe moinsDeClients();
     public void ajouterClient (Employe emp,Client unClient);
-    //public void supprimerClient (Client unClient);
+    public List<Employe> listerEmployes ();
 }

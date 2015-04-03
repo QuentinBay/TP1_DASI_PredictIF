@@ -29,7 +29,7 @@ public class EmployeDaoJpa implements EmployeDao
 /*-----------------------------------METHODES-------------------------------------*/
     @Override
     public void creerEmploye(Employe unEmploye) {
-        JpaUtil.log("debut transaction : creerEmploye");
+        JpaUtil.log("EmployeDaoJpa : creerEmploye");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             em.persist(unEmploye);
@@ -51,23 +51,24 @@ public class EmployeDaoJpa implements EmployeDao
     @Override
     public Employe trouverEmployeAvecPseudoEtMdp(String unPseudo, String unMdp) 
     {
-        Query query= JpaUtil.obtenirEntityManager().createQuery(
-                "select e from Employe e where e.pseudo=:empPseudo "
-                                        + "and e.motDePasse=:empMotDePasse");
-        
-        query.setParameter("empPseudo", unPseudo);
-        query.setParameter("empMotDePasse", unMdp);
-        List<Employe> result = (List<Employe>)query.getResultList();
-        if (!result.isEmpty())
-        {
-            return (result.get(0));
-        }
-        else
-        {
-            /*ATTENTION : Si on ne trouve pas l employe*/
+        JpaUtil.log("EmployeDaoJpa : trouverEmployeAvecPseudoEtMdp");
+        try {
+            Query query= JpaUtil.obtenirEntityManager().createQuery(
+                    "select e from Employe e where e.pseudo=:empPseudo "
+                                            + "and e.motDePasse=:empMotDePasse");
+
+            query.setParameter("empPseudo", unPseudo);
+            query.setParameter("empMotDePasse", unMdp);
+            List<Employe> result = (List<Employe>)query.getResultList();
+            if (!result.isEmpty())
+            {
+                return (result.get(0));
+            }
+            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        
     }
     
     /**
@@ -77,7 +78,7 @@ public class EmployeDaoJpa implements EmployeDao
     @Override
     public Employe moinsDeClients()
     {
-        JpaUtil.log("debut transaction : creerEmploye");
+        JpaUtil.log("EmployeDaoJpa : moinsDeClients");
         try {
             EntityManager em = JpaUtil.obtenirEntityManager();
             Query q = em.createQuery("SELECT e FROM Employe e ORDER BY size(e.clients)").setMaxResults(1);
@@ -88,6 +89,7 @@ public class EmployeDaoJpa implements EmployeDao
         }
     }
     
+    @Override
     public void ajouterClient (Employe emp,Client unClient)
     {
         JpaUtil.log("EmployeDaoJpa : ajouterClient");
@@ -100,6 +102,25 @@ public class EmployeDaoJpa implements EmployeDao
             
         } catch (Exception ex) {
             Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public List<Employe> listerEmployes ()
+    {
+        JpaUtil.log("EmployeDaoJpa : listerEmployes");
+        try {
+            Query query= JpaUtil.obtenirEntityManager().createQuery("select e from Employe e");
+
+            List<Employe> result = (List<Employe>)query.getResultList();
+            if (!result.isEmpty())
+            {
+                return result;
+            }
+            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }

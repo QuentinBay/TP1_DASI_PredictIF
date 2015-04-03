@@ -192,7 +192,7 @@ public class Client implements Serializable {
     public String toString() {
         String retour = "Client n°" + numClient + " : \nPrenom : " + prenom + "\nNom : " + nom 
                             + "\nSigne astrologique : " + signe.getSigne() 
-                            + "\nMediums : \nEmploye referent : ";//+employe.getPrenom();
+                            + "\nMediums : \n";
         for(Medium m : this.getMediums()) {
             retour +=" - "+m.getPseudo()+"\n";
         }
