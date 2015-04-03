@@ -28,6 +28,10 @@ import java.util.Vector;
 import java.util.Iterator;
 import predictif.dao.MediumDao;
 import predictif.dao.jpa.MediumDaoJpa;
+import predictif.metier.modele.Amour;
+import predictif.metier.modele.Prediction;
+import predictif.metier.modele.Sante;
+import predictif.metier.modele.Travail;
 import predictif.util.SimulationEnvoyeurMail;
 /**
  *
@@ -39,7 +43,8 @@ public class Main
     {
         Service service = new Service();
         //service.initialiser();
-        displayData(subToString(service.listerPredictionsTriees().toArray()));
+        Prediction pAm = service.trouverPredictionAmourAvecId(43);
+        System.out.println(pAm.getPrevision());
        /* Client c1 = new Client( 'm',  "Bayarto","Quentin", new Date(93, 10, 10), 
                                 "123 rue", "060555555", "Quentin@hotmail.fr");
         service.ajouterClient(c1);
@@ -142,7 +147,16 @@ public class Main
         System.out.println();
         
         System.out.println("Choix Prediction Travail");
-        displayData(subToString(service..toArray()));*/
+        displayData(subToString(service.listerPredictionsTriees().toArray()));
+        int pAmId = Saisie.lireInteger(" -  Numero de la prediction amour : ");
+        Prediction pAm = service.trouverPredictionAmourAvecId(pAmId);
+        
+        int pStId = Saisie.lireInteger(" -  Numero de la prediction sante : ");
+        Prediction pSt = service.trouverPredictionSanteAvecId(pStId);
+        
+        int pTrId = Saisie.lireInteger(" -  Numero de la prediction travail : ");
+        Prediction pTr = service.trouverPredictionTravailAvecId(pTrId);
+        System.out.println();*/
         
     }
     

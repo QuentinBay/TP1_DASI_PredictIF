@@ -530,4 +530,79 @@ public class Service
             return null;
         }
     }
+    
+    public Prediction trouverPredictionAmourAvecId(long id)
+    {
+        JpaUtil.log("Service : trouverPredictionAmourAvecId");
+        Prediction p;
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            PredictionDao monGE = new AmourDaoJpa();
+            p = monGE.trouverPredictionAvecId(id);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return p;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
+    public Prediction trouverPredictionSanteAvecId(long id)
+    {
+        JpaUtil.log("Service : trouverPredictionSanteAvecId");
+        Prediction p;
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            PredictionDao monGE = new SanteDaoJpa();
+            p = monGE.trouverPredictionAvecId(id);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return p;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
+    public Prediction trouverPredictionTravailAvecId(long id)
+    {
+        JpaUtil.log("Service : trouverPredictionTravailAvecId");
+        Prediction p;
+        try 
+        {
+            JpaUtil.init();
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+
+            PredictionDao monGE = new TravailDaoJpa();
+            p = monGE.trouverPredictionAvecId(id);
+
+            JpaUtil.validerTransaction();
+            JpaUtil.fermerEntityManager();
+            return p;
+        }
+        catch (Exception ex) 
+        {
+            JpaUtil.annulerTransaction();
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
 }

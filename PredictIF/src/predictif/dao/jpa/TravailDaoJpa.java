@@ -37,8 +37,16 @@ public class TravailDaoJpa implements PredictionDao{
     }
 
     @Override
-    public List<Prediction> trouverToutesPredictions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Prediction trouverPredictionAvecId(long id) {
+        JpaUtil.log("TravailDaoJpa : trouverPredictionAvecId");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            return em.find(Prediction.class, id);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }}
     
 }

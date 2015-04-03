@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import predictif.dao.AmourDao;
 import predictif.dao.PredictionDao;
 import predictif.dao.SigneAstrologiqueDao;
 import predictif.metier.modele.Amour;
@@ -46,12 +45,20 @@ public class AmourDaoJpa implements PredictionDao {
 
     @Override
     public List<Prediction> trierPredictionAvecType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
-    public List<Prediction> trouverToutesPredictions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Prediction trouverPredictionAvecId(long id) {
+        JpaUtil.log("ClientDaoJpa : trouverClientAvecId");
+        try {
+            EntityManager em = JpaUtil.obtenirEntityManager();
+            return em.find(Prediction.class, id);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }}
 
 }
