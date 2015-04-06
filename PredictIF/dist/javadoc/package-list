@@ -1,0 +1,6 @@
+predictif
+predictif.dao
+predictif.dao.jpa
+predictif.metier.modele
+predictif.metier.service
+predictif.util
